@@ -1,0 +1,968 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ma",
+				"main\tmain()"
+			],
+			[
+				"exit",
+				"exitPoint"
+			],
+			[
+				"loo",
+				"loopbackTest"
+			],
+			[
+				"exi",
+				"exitPoint"
+			],
+			[
+				"prom",
+				"promtMsg"
+			],
+			[
+				"hi",
+				"historyFilePath"
+			],
+			[
+				"get",
+				"getStr"
+			],
+			[
+				"ho",
+				"goHome"
+			],
+			[
+				"str",
+				"strI"
+			],
+			[
+				"to",
+				"totalLength"
+			],
+			[
+				"clar",
+				"clear_line"
+			],
+			[
+				"clea",
+				"clearLine"
+			],
+			[
+				"pro",
+				"promtMsg"
+			],
+			[
+				"input",
+				"inputStr"
+			],
+			[
+				"ta",
+				"TAB"
+			],
+			[
+				"re",
+				"req\trequire \"..\""
+			],
+			[
+				"bash",
+				"bashrc"
+			],
+			[
+				"pr",
+				"print_packege"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/thor/cpp/CMakeLists.txt",
+			"settings":
+			{
+				"buffer_size": 1,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Package Control Messages\n========================\n\nEasyClangComplete\n-----------------\n\n  A plugin for easy to use clang-based completions::\n  \n      ╔═╗┌─┐┌─┐┬ ┬  ╔═╗┬  ┌─┐┌┐┌┌─┐  ╔═╗┌─┐┌┬┐┌─┐┬  ┌─┐┌┬┐┌─┐\n      ║╣ ├─┤└─┐└┬┘  ║  │  ├─┤││││ ┬  ║  │ ││││├─┘│  ├┤  │ ├┤\n      ╚═╝┴ ┴└─┘ ┴   ╚═╝┴─┘┴ ┴┘└┘└─┘  ╚═╝└─┘┴ ┴┴  ┴─┘└─┘ ┴ └─┘\n  \n  Let't get started!\n  ==================\n  \n  You're just two steps away!\n  \n  1. Install clang\n  ----------------\n  \n  - **Ubuntu**        : ``sudo apt-get install clang``\n  - **OSX**           : ships `clang` by default. You are all set!\n  - **Windows**       : install the latest release from clang website.\n  - **Other Systems** : use your package manager or install from clang website.\n  - clang website: http://llvm.org/releases/download.html\n  \n  2. Configure your includes\n  --------------------------\n  \n  Using CMake?\n  ~~~~~~~~~~~~\n  \n  Plugin will run cmake on a proper ``CMakeLists.txt`` in your project folder and\n  will use information from it to complete your code out of the box.\n  \n  Don't like CMake?\n  ~~~~~~~~~~~~~~~~~~\n  \n  There are many ways of configuring the plugin!\n  Read the docs here: https://niosus.github.io/EasyClangComplete/configs/\n  \n  That's it! You're ready to use the plugin!\n  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  \n  Intro and Documentation\n  ~~~~~~~~~~~~~~~~~~~~~~~\n  \n  https://niosus.github.io/EasyClangComplete/\n  \n  Thanks!\n  =======\n  \n  💜 this plugin? Consider buying me a 🍵\n  https://niosus.github.io/EasyClangComplete/support/\n",
+			"settings":
+			{
+				"buffer_size": 1517,
+				"line_ending": "Unix",
+				"name": "Package Control Messages",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"file": "main.cpp",
+			"settings":
+			{
+				"buffer_size": 125,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/thor/cpp/README.md",
+			"settings":
+			{
+				"buffer_size": 30,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/ShellScript/ShellScript.sublime-build",
+					""
+				],
+				[
+					"Packages/User/python test.sublime-build",
+					""
+				],
+				[
+					"Packages/User/VHD.sublime-build",
+					""
+				],
+				[
+					"Packages/User/VHDL modelsim with warnings.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/ShellScript/ShellScript.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/VHDL/VHDL.sublime-build",
+					""
+				],
+				[
+					"Packages/User/python test.sublime-build",
+					""
+				],
+				[
+					"Packages/User/VHD.sublime-build",
+					""
+				],
+				[
+					"Packages/User/VHDL modelsim with warnings.sublime-build",
+					""
+				],
+				[
+					"Packages/User/VHDL modelsim.sublime-build",
+					""
+				],
+				[
+					"Packages/User/VUnit.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/User/VHDL modelsim.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control:",
+				"Package Control: Install Package"
+			],
+			[
+				"pull",
+				"Git: Pull"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/thor/cpp",
+		"/home/thor/cpp/build",
+		"/home/thor/cpp/include"
+	],
+	"file_history":
+	[
+		"/home/thor/cpp/mian.cpp",
+		"/home/thor/Downloads/cmake-3.14.5-Linux-x86_64.sh",
+		"/home/thor/plusScripts/workers/manduca.rb",
+		"/home/thor/plusScripts/rov_command_and_conquer/cmd_handler.rb",
+		"/home/thor/plusScripts/rov_command_and_conquer/rov_cmd.rb",
+		"/home/thor/.config/sublime-text-3/scratchpad.txt",
+		"/home/thor/.config/sublime-text-3/Packages/SublimeCodeIntel/Default (Linux).sublime-keymap",
+		"/home/thor/plusScripts/workers/user_prompter.rb",
+		"/home/thor/plusScripts/workers/workerTester.rb",
+		"/home/thor/plusScripts/config/zshrc_stuff",
+		"/home/thor/hs_err_pid3254.log",
+		"/home/thor/plusScripts/install/install",
+		"/home/thor/hs_err_pid4501.log",
+		"/home/thor/.config/sublime-text-3/Packages/User/SVN.errors.log",
+		"/home/thor/plusScripts/workers/netScanner.rb",
+		"/home/thor/.manduca-history/Manduca-test",
+		"/home/thor/plusScripts/workers/backupFolderTo.rb",
+		"/home/thor/plusScripts/workers/rubyHelpers.rb",
+		"/home/thor/.config/sublime-text-3/Packages/BeautifyRuby/Default (Linux).sublime-keymap",
+		"/home/thor/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/thor/.common_rc",
+		"/home/thor/plusScripts/workers/logfile",
+		"/home/thor/.config/sublime-text-3/Packages/User/BeautifyRuby.sublime-settings",
+		"/home/thor/.config/sublime-text-3/Packages/BeautifyRuby/BeautifyRuby.sublime-settings",
+		"/home/thor/plusScripts/workers/.inputHistory/manduca-history",
+		"/home/thor/plusScripts/workers/.inputHistory/alphabetic.mda",
+		"/home/thor/RBTW/RBTW",
+		"/home/thor/plusScripts/+/+ln-s_source_link",
+		"/home/thor/plusScripts/+/+deleteFolder",
+		"/home/thor/plusScripts/workers/bashColor.sh",
+		"/home/thor/plusScripts/README.md",
+		"/home/thor/plusScripts/+/plusScriptsPaths",
+		"/home/thor/plusScripts/+/+sshRovDesk",
+		"/home/thor/Desktop/RBTW.desktop",
+		"/home/thor/install_script/scripts/Dev essentials",
+		"/home/thor/plusScripts/+/+test",
+		"/home/thor/plusScripts/install/chmodScripts",
+		"/home/thor/plusScripts/+/+sshRovLab",
+		"/home/thor/plusScripts/+/+sshRovLabDesk",
+		"/home/thor/Desktop/ETW.desktop",
+		"/home/thor/Desktop/rebootToWindows",
+		"/home/thor/Desktop/new_script",
+		"/home/thor/plusScripts/workers/ip_history.rb",
+		"/home/thor/plusScripts/+/å",
+		"/home/thor/plusScripts/+/+autogit_remove",
+		"/home/thor/plusScripts/+/+backupHomeFolderTo",
+		"/home/thor/plusScripts/+/+rov_flashkernel",
+		"/home/thor/plusScripts/+/+rov_getActive",
+		"/home/thor/plusScripts/+/+rov_telnet",
+		"/home/thor/plusScripts/+/+slp_statusBits",
+		"/home/thor/plusScripts/+/+autogit_pull",
+		"/home/thor/plusScripts/+/+autogit_add",
+		"/home/thor/plusScripts/.gitignore",
+		"/home/thor/plusScripts/+/+stt",
+		"/home/thor/plusScripts/+/+scan_net",
+		"/home/thor/plusScripts/+/+autogit",
+		"/home/thor/plusScripts/+/+link",
+		"/home/thor/plusScripts/workers/prettyLink.rb",
+		"/home/thor/plusScripts/+/+rov_cmd",
+		"/home/thor/plusScripts/workers/bash_helper_functions.sh",
+		"/home/thor/plusScripts/workers/globals",
+		"/home/thor/plusScripts/+/+fixnet",
+		"/home/thor/plusScripts/+/+rov_flashnewestkernel",
+		"/home/thor/plusScripts/+/+rov_flashNewestFw",
+		"/home/thor/.zshrc",
+		"/home/thor/plusScripts/config/fish_stuff",
+		"/home/thor/.config/fish/config.fish",
+		"/home/thor/plusScripts/run_install",
+		"/home/thor/.bashrc",
+		"/home/thor/plusScripts/inst",
+		"/home/thor/.commonrc",
+		"/home/thor/plusScripts/workes/globals",
+		"/home/thor/scripts/.fileDump/ipRange_10.0.100.0",
+		"/home/thor/scripts/Gemfile",
+		"/home/thor/scripts/rov_cmd_dev.rb",
+		"/home/thor/zynq_migration/slp_zynq/slp_zynq.srcs/sources_1/new/slp.vhd",
+		"/home/thor/zynq_migration/z_turn/z_turn.srcs/sources_1/new/blinky.vhd",
+		"/home/thor/zynq_migration/blink_hello_world_zybo/blink_hello_world_zybo.srcs/constrs_1/imports/digilent-xdc-master/Zybo-Master.xdc",
+		"/home/thor/zynq_migration/slp.vhd",
+		"/home/thor/zynq_migration/z_turn_blink3/z_turn_blink3.srcs/sources_1/imports/new/blinky.vhd",
+		"/home/thor/zynq_migration/z_turn_blink/z_turn_blink.srcs/constrs_1/imports/constraints/system.xdc",
+		"/home/thor/zynq_migration/z_turn/z_turn.srcs/constrs_1/imports/constraints/system.xdc",
+		"/run/user/1000/gvfs/sftp:host=10.0.100.145,user=thm/home/thm/zynq_migration/slp_zynq/slp_zynq.srcs/sources_1/new/slp.vhd",
+		"/home/thor/.wine/drive_c/users/thor/Application",
+		"/home/thor/scripts/bashrc_stuff.sh",
+		"/home/thor/scripts/+in",
+		"/home/thor/scripts/å",
+		"/home/thor/scripts/ø",
+		"/home/thor/scripts/+update",
+		"/home/thor/scripts/autogit_paths.yml",
+		"/home/thor/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
+		"/home/thor/.config/sublime-text-3/Packages/User/SyncSettings.sublime-settings",
+		"/home/thor/.config/sublime-text-3/Packages/Sync Settings/SyncSettings.sublime-settings"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 124.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/thor/cpp/CMakeLists.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								1
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1517,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								376,
+								376
+							]
+						],
+						"settings":
+						{
+							"auto_indent": false,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_width": 2,
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "main.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 125,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								90,
+								90
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										93,
+										94
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/double_quote.png",
+										"region.greenish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										80,
+										81
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
+							],
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/thor/cpp/README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 30,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								16,
+								16
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
+							],
+							"markdonw_live_preview_last_run": 1562624549.98,
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 44.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 264.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 121.0
+	},
+	"pinned_build_system": "Packages/Ruby/Ruby.sublime-build",
+	"project": "cpp.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 288.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
