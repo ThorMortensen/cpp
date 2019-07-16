@@ -4,10 +4,14 @@ if(${CMAKE_VERSION} VERSION_LESS 3.12)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
 endif()
 
+set(CMAKE_REQUIRED_FLAGS -std=c++17)
+
 
 project(cppDojo VERSION 1.0
         DESCRIPTION "Train cpp"
         LANGUAGES CXX)
+
+
 
 
 
