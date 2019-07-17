@@ -1,0 +1,20 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+  "cmake":
+{
+  "schemes":
+  [
+    {
+      "name": "Debug",
+      // this assumes your project file is at the root of your project
+      // folder. If it's not, try using ${folder} instead of ${project_path}
+      "build_folder": "${project_path}/build"
+    }
+  ]
+}
+}
