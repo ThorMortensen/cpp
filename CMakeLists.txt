@@ -4,7 +4,8 @@ if(${CMAKE_VERSION} VERSION_LESS 3.12)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
 endif()
 
-set(CMAKE_REQUIRED_FLAGS -std=c++17)
+# set(CMAKE_REQUIRED_FLAGS -std=c++17)
+set(CMAKE_CXX_STANDARD 17)
 
 
 project(cppDojo VERSION 1.0
@@ -14,8 +15,7 @@ project(cppDojo VERSION 1.0
 
 
 
-
-add_executable(helloWorld src/helloWorld/main.cpp)
+add_executable(first.run src/helloWorld/main.cpp)
 
 
 # target_compile_options(project_warnings
