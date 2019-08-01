@@ -6,11 +6,23 @@
 */
 #include <iostream>
 
+#include "hello_world2.hpp"
 
 int main(int argc, char const *argv[])
 {
+  bool foo = true;
+
+  if (foo) {
+
+  }
+
+  hello_world2 hlw2;
 
   std::cout << "Hello cpp world! " << std::endl;
+
+
+  hlw2.print();
+
   return 0;
 }
 
