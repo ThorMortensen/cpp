@@ -12,6 +12,7 @@ hello_world2::~hello_world2() {
 
 void hello_world2::print(){
   int foo = true;
+  bar = 2;
 
   if(foo){
     std::cout << "hello world from hello world 2" << std::endl;

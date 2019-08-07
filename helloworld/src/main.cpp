@@ -8,7 +8,7 @@
 
 #include "hello_world2.hpp"
 
-int main(int argc, char const *argv[])
+int main()
 {
   bool foo = true;
 
