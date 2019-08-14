@@ -1,7 +1,5 @@
 #include "Prompt.hpp"
 
-#include <iostream>
-
 namespace Manduca {
 
 Prompt::Prompt(/* args */) {}

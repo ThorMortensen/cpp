@@ -1,20 +1,31 @@
 #include <iostream>
 #include <ncurses.h>
 
-#include "Prompt.hpp"
+#include "Color.hpp"
+#include "Curser.hpp"
 
-int main(/* int argc, char const *argv[] */ ) {
+std::string foo(const std::string &s) { return s + " bla bla "; }
+
+int main(/* int argc, char const *argv[] */) {
+
+  Manduca::Color color;
+
+  std::string s = "foo";
+  std::string b = "foo";
+
+  b = foo(s);
 
 
 
-  std::cout << "prompt test starts..." << std::endl;
+  std::cout << color.red(b) << std::endl;
 
+  // std::cout << "prompt test starts..." << std::endl;
 
-  Manduca::Prompt m;
+  // Manduca::Curser c;
 
-  m.prompt("Hello world!");
+  // c.print("Hello curser");
 
-  std::cout << "prompt test ends..." << std::endl;
+  // std::cout << "prompt test ends..." << std::endl;
 
   return 0;
 }

@@ -1,5 +1,8 @@
 #pragma once
+
 #include <string>
+
+#include "Curser.hpp"
 
 namespace Manduca {
 
@@ -13,4 +16,4 @@ public:
   std::string prompt(std::string inputStr);
 };
 
-} // namespace manduca
+} // namespace Manduca
