@@ -1,12 +1,22 @@
 <a id="markdown-c" name="c"></a>
 # C++
 
+
+<a id="markdown-description" name="description"></a>
+## Description
+
+A C++ dojo.
+
+<a id="markdown-table-of-content" name="table-of-content"></a>
+## Table of content
 <!-- TOC -->
 
 1. [C++](#c)
   1. [Description](#description)
-  2. [TODO](#todo)
+  2. [Table of content](#table-of-content)
+  3. [TODO](#todo)
     1. [C++ stuff](#c-stuff)
+    2. [Extensions for VS code](#extensions-for-vs-code)
 2. [Things to learn](#things-to-learn)
   1. [rvalue/lvalue](#rvaluelvalue)
   2. [Const correctness](#const-correctness)
@@ -21,11 +31,6 @@
 <!-- /TOC -->
 
 
-<a id="markdown-description" name="description"></a>
-## Description
-
-A C++ dojo.
-
 <a id="markdown-todo" name="todo"></a>
 ## TODO
 
@@ -34,7 +39,8 @@ A C++ dojo.
 
 - [ ] Add address sanitizer and just all sanitizer to project and CMake .
 
-Extensions for VS code:
+<a id="markdown-extensions-for-vs-code" name="extensions-for-vs-code"></a>
+### Extensions for VS code
 
 - [ ] Header & source file syncer
 - [ ] Jump to end of line to add ";"
