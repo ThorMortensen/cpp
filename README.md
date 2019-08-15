@@ -37,7 +37,10 @@ A C++ dojo.
 <a id="markdown-c-stuff" name="c-stuff"></a>
 ### C++ stuff
 
-- [ ] Add address sanitizer and just all sanitizer to project and CMake .
+- [ ] Add address sanitizer and just all sanitizer to project and CMake.
+- [ ] Add fuzzer test.
+- [ ] Add unit test.
+- [ ] Add DevOps.
 
 <a id="markdown-extensions-for-vs-code" name="extensions-for-vs-code"></a>
 ### Extensions for VS code

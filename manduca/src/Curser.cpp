@@ -1,21 +1,44 @@
+/**
+ * @file Curser.cpp
+ * @author Thor Mortensen (thor.mortensen@gmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2019-08-16
+ *
+ * @copyright Copyright (c) 2019
+ *
+ */
 #include "Curser.hpp"
+#include "Manduca.hpp"
 
 namespace Manduca {
 
-
-
-void Curser::print(std::string str) {
-
-  std::cout << color.red(str) << "foo" << std::endl;
-
-
+void Curser::print(const std::string &str) {
+  curserPos.x += str.length();
+  std::cout << str << std::endl;
 }
 
-void Curser::move(Direction d) {
+// Esc[ValueA	Move cursor up n lines	CUU
+
+void Curser::move(const Direction_e d) { move(d, 1); }
+
+void Curser::move(const Direction_e d, int amount) {
   switch (d) {
-  case Direction::LEFT:
-    std::cout << "Defaulted in move" << std::endl;
-    curserPos++;
+  case Direction_e::LEFT:
+    // "\e[30m"+str+"\e[0m"
+    curserPos.x -= amount;
+    break;
+  case Direction_e::RIGHT:
+    curserPos.x += amount;
+    break;
+  case Direction_e::UP:
+    // Esc[2J
+    std::cout << "\e[3A" << std::endl;
+    curserPos.y += amount;
+    break;
+  case Direction_e::DOWN:
+    curserPos.y -= amount;
+    break;
   default:
     std::cout << "Defaulted in move" << std::endl;
   }
