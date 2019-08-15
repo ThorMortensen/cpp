@@ -20,4 +20,3 @@ int main(/* int argc, char const *argv[] */) {
 
   return 0;
 }
-// Fixed color. Must find solutasdion to curser movement.
