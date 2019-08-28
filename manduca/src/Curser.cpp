@@ -15,28 +15,33 @@ namespace Manduca {
 
 void Curser::print(const std::string &str) {
   curserPos.x += str.length();
-  std::cout << str << std::endl;
+  std::cout << str;
 }
-
-// Esc[ValueA	Move cursor up n lines	CUU
 
 void Curser::move(const Direction_e d) { move(d, 1); }
 
+void Curser::goHome(){
+  std::cout << "\e[H";
+
+}
+
 void Curser::move(const Direction_e d, int amount) {
+  std::cout << "\e[";
   switch (d) {
   case Direction_e::LEFT:
-    // "\e[30m"+str+"\e[0m"
+    std::cout << amount << "D";
     curserPos.x -= amount;
     break;
   case Direction_e::RIGHT:
+    std::cout << amount << "C";
     curserPos.x += amount;
     break;
   case Direction_e::UP:
-    // Esc[2J
-    std::cout << "\e[3A" << std::endl;
+    std::cout << amount << "A";
     curserPos.y += amount;
     break;
   case Direction_e::DOWN:
+    std::cout << amount << "B";
     curserPos.y -= amount;
     break;
   default:

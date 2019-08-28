@@ -12,6 +12,7 @@
 
 #include <cstdint>
 #include <iostream>
+#include <sstream>
 
 #include "Color.hpp"
 
@@ -37,54 +38,15 @@ public:
   void move(const Direction_e d);
   void print(const std::string &str);
 
+  void goHome();
+
 private:
   Coordinate_s curserPos = {0};
+  
+
+
 };
 
-template <class T> class bound {
 
-private:
-  T val;
-  T lMin;
-  T lMax;
-
-  T limit(T value) {
-    if (value > lMax) {
-      return lMax;
-    } else if (value < lMin) {
-      return lMin;
-    } else {
-      return value;
-    }
-  }
-
-public:
-  bound(T value, T limitMin, T limitMax)
-      : val(value), lMin(limitMin), lMax(limitMax) {}
-
-  T get() { return val; }
-  T set(T value) {
-    val = limit(value);
-    return get();
-  }
-
-  void operator=(T value) { set(value); }
-
-}; // namespace Manduca
-
-// template <class T>
-// class bound {
-//    private:
-//       vector<T> elems;    // elements
-
-//    public:
-//       void push(T const&);  // push element
-//       void pop();               // pop element
-//       T top() const;            // return top element
-
-//       bool empty() const {      // return true if empty.
-//          return elems.empty();
-//       }
-// };
 
 } // namespace Manduca
