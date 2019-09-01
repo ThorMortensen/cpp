@@ -20,8 +20,14 @@ void Curser::print(const std::string &str) {
 
 void Curser::move(const Direction_e d) { move(d, 1); }
 
-void Curser::goHome(){
-  std::cout << "\e[H";
+void Curser::goHome() { std::cout << "\e[H"; }
+
+
+
+void Curser::clearLine() {
+
+}
+void Curser::printMenu() {
 
 }
 

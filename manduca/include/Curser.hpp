@@ -40,13 +40,44 @@ public:
 
   void goHome();
 
+  void clearLine();
+  void printMenu();
+
+  void curserAction(std::string cmd);
+
 private:
   Coordinate_s curserPos = {0};
-  
 
+  static const std::string ESC_START = "\e[";
+  // Movement
+  static const std::string UP = "A";
+  static const std::string DOWN = "B";
+  static const std::string LEFT = "D";
+  static const std::string RIGHT = "C";
+  // Misc
+  static const std::string SAVE = "s";
+  static const std::string LOAD = "u";
+  // Line clear
+  static const std::string CL_R = "K";    // Clear line from cursor right	EL0
+  static const std::string CL_L = "1K";   // Clear line from cursor left	EL1
+  static const std::string CL_ALL = "2K"; // Clear entire line	EL2
+  // Screen clear
+  static const std::string CS_D = "J";    // Clear screen from cursor down	ED0
+  static const std::string CS_U = "1J";   // Clear screen from cursor up	ED1
+  static const std::string CS_ALL = "2J"; // Clear entire screen	ED2
 
+  // #define CURSER_COMMANDS(CURSER_COMMAND)                                        \
+//   /*             name ,   value      */                                        \
+//   CURSER_COMMAND(CLEAR_LINE, "[H")                                             \
+//   CURSER_COMMAND(SAVE, "[s")                                                   \
+//   CURSER_COMMAND(LOAD, "[u")
+
+  // #define GENERATE_ENUM(name, val) name##_e,
+  // #define GENERATE_STRING(name, val) val,
+
+  //   enum CurserCmd { CURSER_COMMANDS(GENERATE_ENUM) CMD_COUNT };
+  //   std::string curserCmdStrings[CMD_COUNT] = {
+  //   CURSER_COMMANDS(GENERATE_STRING)};
 };
-
-
 
 } // namespace Manduca
