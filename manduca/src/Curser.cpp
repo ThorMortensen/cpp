@@ -18,24 +18,21 @@ void Curser::print(const std::string &str) {
   std::cout << str;
 }
 
+void Curser::curserAction(std::string cmd) { std::cout << ESC_START << cmd; }
+
+
 void Curser::move(const Direction_e d) { move(d, 1); }
 
 void Curser::goHome() { std::cout << "\e[H"; }
 
+void Curser::clearLine() {}
+void Curser::printMenu() {}
 
-
-void Curser::clearLine() {
-
-}
-void Curser::printMenu() {
-
-}
 
 void Curser::move(const Direction_e d, int amount) {
-  std::cout << "\e[";
   switch (d) {
   case Direction_e::LEFT:
-    std::cout << amount << "D";
+    curserAction(std::to_string(amount) + LEFT);
     curserPos.x -= amount;
     break;
   case Direction_e::RIGHT:

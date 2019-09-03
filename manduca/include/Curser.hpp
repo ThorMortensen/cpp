@@ -47,24 +47,23 @@ public:
 
 private:
   Coordinate_s curserPos = {0};
-
-  static const std::string ESC_START = "\e[";
+  inline static const std::string ESC_START = "\e[";
   // Movement
-  static const std::string UP = "A";
-  static const std::string DOWN = "B";
-  static const std::string LEFT = "D";
-  static const std::string RIGHT = "C";
+  inline static const std::string UP = "A";
+  inline static const std::string DOWN = "B";
+  inline static const std::string LEFT = "D";
+  inline static const std::string RIGHT = "C";
   // Misc
-  static const std::string SAVE = "s";
-  static const std::string LOAD = "u";
+  inline static const std::string SAVE = "s";
+  inline static const std::string LOAD = "u";
   // Line clear
-  static const std::string CL_R = "K";    // Clear line from cursor right	EL0
-  static const std::string CL_L = "1K";   // Clear line from cursor left	EL1
-  static const std::string CL_ALL = "2K"; // Clear entire line	EL2
+  inline static const std::string CL_R = "K";    // Clear line from cursor right	EL0
+  inline static const std::string CL_L = "1K";   // Clear line from cursor left	EL1
+  inline static const std::string CL_ALL = "2K"; // Clear entire line	EL2
   // Screen clear
-  static const std::string CS_D = "J";    // Clear screen from cursor down	ED0
-  static const std::string CS_U = "1J";   // Clear screen from cursor up	ED1
-  static const std::string CS_ALL = "2J"; // Clear entire screen	ED2
+  inline static const std::string CS_D = "J";    // Clear screen from cursor down	ED0
+  inline static const std::string CS_U = "1J";   // Clear screen from cursor up	ED1
+  inline static const std::string CS_ALL = "2J"; // Clear entire screen	ED2
 
   // #define CURSER_COMMANDS(CURSER_COMMAND)                                        \
 //   /*             name ,   value      */                                        \
