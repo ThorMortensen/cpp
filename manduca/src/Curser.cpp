@@ -11,22 +11,54 @@
 #include "Curser.hpp"
 #include "Manduca.hpp"
 
+#include <stdio.h>
+
 namespace Manduca {
+
+void Curser::flush() { std::cout.flush(); }
 
 void Curser::print(const std::string &str) {
   curserPos.x += str.length();
   std::cout << str;
 }
 
-void Curser::curserAction(std::string cmd) { std::cout << ESC_START << cmd; }
+void Curser::jumpLinesDown(int amount) {
+  move(Direction_e::DOWN, amount);
+  std::cout << "\r";
 
+}
+
+void Curser::jumpLinesUp(int amount) {
+  move(Direction_e::UP, amount);
+  std::cout << "\r";
+}
+
+void Curser::clearLine() {}
+
+void Curser::clearDown() {
+  curserAction(CS_D);
+  flush();
+}
+
+Manduca::KeyCode Curser::getKeyPress() const {
+  char c = 0;
+  system("/bin/stty cooked");
+  // std::cin >> c;
+  c = getchar();
+  system("/bin/stty raw");
+  return static_cast<Manduca::KeyCode>(c);
+}
+
+void Curser::curserAction(const std::string &cmd) {
+  std::cout << ESC_START << cmd;
+}
 
 void Curser::move(const Direction_e d) { move(d, 1); }
 
-void Curser::goHome() { std::cout << "\e[H"; }
-
-void Curser::clearLine() {}
-void Curser::printMenu() {}
+void Curser::goHome() {
+  curserAction(GHOME);
+  curserPos = {0};
+}
 
 
 void Curser::move(const Direction_e d, int amount) {
@@ -36,15 +68,15 @@ void Curser::move(const Direction_e d, int amount) {
     curserPos.x -= amount;
     break;
   case Direction_e::RIGHT:
-    std::cout << amount << "C";
+    curserAction(std::to_string(amount) + RIGHT);
     curserPos.x += amount;
     break;
   case Direction_e::UP:
-    std::cout << amount << "A";
+    curserAction(std::to_string(amount) + UP);
     curserPos.y += amount;
     break;
   case Direction_e::DOWN:
-    std::cout << amount << "B";
+    curserAction(std::to_string(amount) + DOWN);
     curserPos.y -= amount;
     break;
   default:

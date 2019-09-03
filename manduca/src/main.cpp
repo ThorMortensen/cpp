@@ -5,13 +5,8 @@
 
 #include "Manduca.hpp"
 
-void testStrCol() {
+#include <unistd.h>
 
-  Manduca::Curser c;
-
-  c.move(Manduca::Curser::Direction_e::UP);
-  c.print("Hello curser");
-}
 
 void testBound() {
   // Manduca::bound<int> f(0, 0, 10);
@@ -33,20 +28,43 @@ void testBound() {
 
 void testCurserMovement() {
   Manduca::Curser c;
-  c.print("This is 0 (aka home)");
 
-  // c.move(Manduca::Curser::Direction_e::UP, 3);
-  c.print("This is 3 up");
-  c.goHome();
+  for (int i = 0; i < 10; i++)
+  {
+    // c.print(std::to_string(i) + "\n");
+     std::cout << std::to_string(i) << std::endl;
+  }
+  // c.flush();
+  
+  sleep(3);
 
+  c.jumpLinesUp(5);
+  c.print("this is 5 up");
 
+  c.jumpLinesDown(5);
+  c.print("this is 5 DOWN");
+  c.print("\n");
+
+  c.flush();
+}
+
+void testPrompt(){
+  std::vector<std::string> opt = {"one", "two", "three", "four"};
+  Manduca::Prompt prompt;
+
+  int32_t answ = prompt.choose("Choose one:",opt);
+
+  std::cout << "You chose number [" << answ << "]" << std::endl;
+  std::cout << "You chose opt [" << opt[answ] << "]" << std::endl;
 
 }
+
 
 int main(/* int argc, char const *argv[] */) {
 
   std::cout << "prompt test starts..." << std::endl;
 
+  // testPrompt();
   testCurserMovement();
 
   std::cout << "prompt test ends..." << std::endl;

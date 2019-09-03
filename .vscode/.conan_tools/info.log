@@ -1,0 +1,34 @@
+Auto detecting your dev setup to initialize the default profile (/home/thor/.conan/profiles/default)
+Found gcc 7
+Found clang 6.0
+gcc>=5, using the major as version
+
+************************* WARNING: GCC OLD ABI COMPATIBILITY ***********************
+ 
+Conan detected a GCC version > 5 but has adjusted the 'compiler.libcxx' setting to
+'libstdc++' for backwards compatibility.
+Your compiler is likely using the new CXX11 ABI by default (libstdc++11).
+
+If you want Conan to use the new ABI for the default profile, run:
+
+    $ conan profile update settings.compiler.libcxx=libstdc++11 default
+
+Or edit '/home/thor/.conan/profiles/default' and set compiler.libcxx=libstdc++11
+
+************************************************************************************
+
+
+
+Default settings
+	os=Linux
+	os_build=Linux
+	arch=x86_64
+	arch_build=x86_64
+	compiler=gcc
+	compiler.version=7
+	compiler.libcxx=libstdc++
+	build_type=Release
+*** You can change them in /home/thor/.conan/profiles/default ***
+*** Or override with -s compiler='other' -s ...s***
+
+

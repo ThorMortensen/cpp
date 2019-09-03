@@ -15,6 +15,7 @@
 #include <sstream>
 
 #include "Color.hpp"
+#include "KeyCodes.hpp"
 
 namespace Manduca {
 
@@ -29,6 +30,7 @@ public:
 
   enum class Direction_e { UP, DOWN, LEFT, RIGHT };
 
+
   struct Coordinate_s {
     int x = 0;
     int y = 0;
@@ -41,12 +43,19 @@ public:
   void goHome();
 
   void clearLine();
-  void printMenu();
+  void clearDown();
+  void flush();
 
-  void curserAction(std::string cmd);
+  void jumpLinesDown(int amount);
+  void jumpLinesUp(int amount);
+
+  KeyCode getKeyPress() const;
+
 
 private:
   Coordinate_s curserPos = {0};
+  void curserAction(const std::string& cmd);
+
   inline static const std::string ESC_START = "\e[";
   // Movement
   inline static const std::string UP = "A";
@@ -56,6 +65,7 @@ private:
   // Misc
   inline static const std::string SAVE = "s";
   inline static const std::string LOAD = "u";
+  inline static const std::string GHOME = "H"; // Go home
   // Line clear
   inline static const std::string CL_R = "K";    // Clear line from cursor right	EL0
   inline static const std::string CL_L = "1K";   // Clear line from cursor left	EL1
@@ -64,6 +74,7 @@ private:
   inline static const std::string CS_D = "J";    // Clear screen from cursor down	ED0
   inline static const std::string CS_U = "1J";   // Clear screen from cursor up	ED1
   inline static const std::string CS_ALL = "2J"; // Clear entire screen	ED2
+
 
   // #define CURSER_COMMANDS(CURSER_COMMAND)                                        \
 //   /*             name ,   value      */                                        \
