@@ -1,10 +1,6 @@
 #include <iostream>
-#include <ncurses.h>
-
 #include "Curser.hpp"
-
 #include "Manduca.hpp"
-
 #include <unistd.h>
 
 
@@ -59,13 +55,20 @@ void testPrompt(){
 
 }
 
+void keyCodeDbg(){
+  Manduca::Curser c;
+  c.printDbgKeyPress();
+}
+
 
 int main(/* int argc, char const *argv[] */) {
 
   std::cout << "prompt test starts..." << std::endl;
 
+
+  keyCodeDbg();
   // testPrompt();
-  testCurserMovement();
+  // testCurserMovement();
 
   std::cout << "prompt test ends..." << std::endl;
 

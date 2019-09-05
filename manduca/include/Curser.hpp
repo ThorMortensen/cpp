@@ -51,29 +51,34 @@ public:
 
   KeyCode getKeyPress() const;
 
+  void caretShow(bool isShowing) const;
 
+  void printDbgKeyPress() const;
 private:
   Coordinate_s curserPos = {0};
-  void curserAction(const std::string& cmd);
+  void curserAction(const std::string_view& cmd) const;
 
-  inline static const std::string ESC_START = "\e[";
+  constexpr static const char ESC_START[] = "\e[";
   // Movement
-  inline static const std::string UP = "A";
-  inline static const std::string DOWN = "B";
-  inline static const std::string LEFT = "D";
-  inline static const std::string RIGHT = "C";
+  constexpr static const char UP[] = "A";
+  constexpr static const char DOWN[] = "B";
+  constexpr static const char LEFT[] = "D";
+  constexpr static const char RIGHT[] = "C";
   // Misc
-  inline static const std::string SAVE = "s";
-  inline static const std::string LOAD = "u";
-  inline static const std::string GHOME = "H"; // Go home
+  constexpr static const char SAVE[] = "s";
+  constexpr static const char LOAD[] = "u";
+  constexpr static const char GHOME[] = "H"; // Go home
+  constexpr static const char HIDE_CURSER[] = "?25l"; // Go home
+  constexpr static const char SHOW_CURSER[] = "?25h"; // Go home
+  
   // Line clear
-  inline static const std::string CL_R = "K";    // Clear line from cursor right	EL0
-  inline static const std::string CL_L = "1K";   // Clear line from cursor left	EL1
-  inline static const std::string CL_ALL = "2K"; // Clear entire line	EL2
+  constexpr static const char CL_R[] = "K";    // Clear line from cursor right	EL0
+  constexpr static const char CL_L[] = "1K";   // Clear line from cursor left	EL1
+  constexpr static const char CL_ALL[] = "2K"; // Clear entire line	EL2
   // Screen clear
-  inline static const std::string CS_D = "J";    // Clear screen from cursor down	ED0
-  inline static const std::string CS_U = "1J";   // Clear screen from cursor up	ED1
-  inline static const std::string CS_ALL = "2J"; // Clear entire screen	ED2
+  constexpr static const char CS_D[] = "J";    // Clear screen from cursor down	ED0
+  constexpr static const char CS_U[] = "1J";   // Clear screen from cursor up	ED1
+  constexpr static const char CS_ALL[] = "2J"; // Clear entire screen	ED2
 
 
   // #define CURSER_COMMANDS(CURSER_COMMAND)                                        \

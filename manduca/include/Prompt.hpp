@@ -21,8 +21,7 @@ public:
 
 private:
   Curser c;
-  void paintChooseMenu(int32_t select,
-                       const std::vector<std::string> &options) ;
+
 };
 
 } // namespace Manduca
