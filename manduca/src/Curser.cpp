@@ -11,6 +11,9 @@
 #include "Curser.hpp"
 #include "Manduca.hpp"
 
+// #include <conio.h>
+#include <iostream>
+
 #include <stdio.h>
 
 namespace Manduca {
@@ -61,6 +64,30 @@ void Curser::printDbgKeyPress() const {
       return;
     }
   }
+
+  // while (true) {
+  //   // KeyCode kc = getKeyPress();
+  //   char str[256] = {0};
+  //   std::string c;
+  //   system("/bin/stty raw");
+  //   // std::cin >> c;
+  //   std::getline(std::cin, c);
+
+  //   // std::cin.get(str, 256);
+  //   c = getchar();
+  //   system("/bin/stty cooked");
+  //   // std::string c(str);
+
+  //   std::cout << "String codes [";
+  //   for (size_t i = 0; i < c.length(); i++) {
+  //     std::cout << std::to_string(static_cast<int32_t>(c[i])) << ", ";
+  //   }
+
+  //   std::cout << " Str [" << c << "]" << std::endl;
+  //   if (c == "q") {
+  //     return;
+  //   }
+  // }
 }
 
 void Curser::curserAction(const std::string_view &cmd) const {
