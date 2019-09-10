@@ -33,7 +33,7 @@ enum class KeyCode : u_char {
     X = 27,
     Y = 28,
     Z = 29,
-    KEY_1 = 30,Q
+    KEY_1 = 30,
     KEY_2 = 31,
     KEY_3 = 32,
     KEY_4 = 33,

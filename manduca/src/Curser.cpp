@@ -46,21 +46,21 @@ void Curser::caretShow(bool isShowing) const {
   curserAction(isShowing ? SHOW_CURSER : HIDE_CURSER);
 }
 
-Manduca::KeyCode Curser::getKeyPress() const {
+char Curser::getKeyPress() const {
   char c = 0;
-  system("/bin/stty raw");
+  system("/bin/stty raw -echo");
   // std::cin >> c;
   c = getchar();
-  system("/bin/stty cooked");
-  return static_cast<Manduca::KeyCode>(c);
+  system("/bin/stty sane");
+  return c;
 }
 
 void Curser::printDbgKeyPress() const {
   while (true) {
-    KeyCode kc = getKeyPress();
+    char kc = getKeyPress();
     std::cout << "KeyCode [" << std::to_string(static_cast<int32_t>(kc))
-              << "], Char [" << static_cast<char>(kc) << ']' << std::endl;
-    if (kc == KeyCode::Q) {
+              << "], Char --> " << static_cast<char>(kc) << std::endl;
+    if (static_cast<char>(kc) == 'q') {
       return;
     }
   }

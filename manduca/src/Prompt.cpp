@@ -28,7 +28,7 @@ int32_t Prompt::choose(const std::string &question,
     }
     c.jumpLinesUp(optCount);
     c.caretShow(false);
-    kIn = c.getKeyPress();
+    // kIn =  c.getKeyPress();
     switch (kIn) {
     case KeyCode::Up:
       selection--;

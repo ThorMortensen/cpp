@@ -49,7 +49,7 @@ public:
   void jumpLinesDown(int amount);
   void jumpLinesUp(int amount);
 
-  KeyCode getKeyPress() const;
+  char getKeyPress() const;
 
   void caretShow(bool isShowing) const;
 
