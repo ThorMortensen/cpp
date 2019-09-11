@@ -3,8 +3,6 @@
 
 namespace Manduca {
 
-
-
 int32_t Prompt::choose(const std::string &question,
                        const std::vector<std::string> &options) {
   int32_t optCount = static_cast<int>(options.size());
@@ -26,24 +24,26 @@ int32_t Prompt::choose(const std::string &question,
         std::cout << "\n";
       }
     }
+    
     c.jumpLinesUp(optCount);
     c.caretShow(false);
-    // kIn =  c.getKeyPress();
+    c.flush();
+
+    kIn = c.getKeyPress();
+
     switch (kIn) {
-    case KeyCode::Up:
+    case KeyCode::UP:
       selection--;
       break;
-    case KeyCode::Down:
+    case KeyCode::DOWN:
       if (selection < static_cast<int>(options.size())) {
         selection++;
       }
       break;
-    case KeyCode::KP_Enter:
-    case KeyCode::Enter:
+    case KeyCode::ENTER:
       done = true;
       break;
     default:
-      std::cerr << "Defaulted in choose select";
       break;
     }
   }

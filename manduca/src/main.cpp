@@ -1,8 +1,7 @@
-#include <iostream>
 #include "Curser.hpp"
 #include "Manduca.hpp"
+#include <iostream>
 #include <unistd.h>
-
 
 void testBound() {
   // Manduca::bound<int> f(0, 0, 10);
@@ -25,13 +24,12 @@ void testBound() {
 void testCurserMovement() {
   Manduca::Curser c;
 
-  for (int i = 0; i < 10; i++)
-  {
+  for (int i = 0; i < 10; i++) {
     // c.print(std::to_string(i) + "\n");
-     std::cout << std::to_string(i) << std::endl;
+    std::cout << std::to_string(i) << std::endl;
   }
   // c.flush();
-  
+
   sleep(3);
 
   c.jumpLinesUp(5);
@@ -44,31 +42,38 @@ void testCurserMovement() {
   c.flush();
 }
 
-void testPrompt(){
+void testPrompt() {
   std::vector<std::string> opt = {"one", "two", "three", "four"};
   Manduca::Prompt prompt;
 
-  int32_t answ = prompt.choose("Choose one:",opt);
+  int32_t answ = prompt.choose("Choose one:", opt);
 
   std::cout << "You chose number [" << answ << "]" << std::endl;
   std::cout << "You chose opt [" << opt[answ] << "]" << std::endl;
-
 }
 
-void keyCodeDbg(){
+void keyCodeDbg() {
   Manduca::Curser c;
   c.printDbgKeyPress();
 }
 
+void stringTests() {
+  std::string ts;
+
+  std::cout << ts.capacity() << std::endl;
+  ts.clear();
+  ts += 'c';
+  std::cout << ts.capacity() << std::endl;
+}
 
 int main(/* int argc, char const *argv[] */) {
 
   std::cout << "prompt test starts..." << std::endl;
 
-
-  keyCodeDbg();
-  // testPrompt();
+  // keyCodeDbg();
+  testPrompt();
   // testCurserMovement();
+  // stringTests();
 
   std::cout << "prompt test ends..." << std::endl;
 

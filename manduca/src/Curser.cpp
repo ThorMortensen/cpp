@@ -46,18 +46,68 @@ void Curser::caretShow(bool isShowing) const {
   curserAction(isShowing ? SHOW_CURSER : HIDE_CURSER);
 }
 
-char Curser::getKeyPress() const {
-  char c = 0;
-  system("/bin/stty raw -echo");
-  // std::cin >> c;
-  c = getchar();
-  system("/bin/stty sane");
-  return c;
+void Curser::setRawTerminal(bool isRaw) const {
+  if (isRaw) {
+    system("/bin/stty raw -echo");
+  } else {
+    system("/bin/stty sane");
+  }
+}
+
+KeyCode Curser::getKeyPress() {
+  int c = 0;
+  bool readingInput = true;
+  KeyCode state = KeyCode::NOP;
+  KeyCode nextState = KeyCode::NOP;
+
+  inputStr.clear();
+
+  setRawTerminal(true);
+
+  while (readingInput) {
+    c = getchar();
+    inputStr += c;
+    nextState = static_cast<KeyCode>(c);
+
+    switch (state) {
+    case KeyCode::NOP:
+      if (nextState != KeyCode::FUNC_START) {
+        readingInput = false;
+      }
+      state = nextState;
+      break;
+
+    case KeyCode::FUNC_START:
+      if (nextState == KeyCode::FUNC_CONF) {
+        state = nextState;
+      } else {
+        state = KeyCode::NOP;
+        readingInput = false;
+      }
+      break;
+
+    case KeyCode::FUNC_CONF:
+      state = nextState;
+      readingInput = false;
+      break;
+
+    default:
+      state = nextState;
+      readingInput = false;
+      break;
+    }
+  }
+  setRawTerminal(false);
+  return state;
 }
 
 void Curser::printDbgKeyPress() const {
   while (true) {
-    char kc = getKeyPress();
+
+    setRawTerminal(true);
+    char kc = getchar();
+    setRawTerminal(false);
+
     std::cout << "KeyCode [" << std::to_string(static_cast<int32_t>(kc))
               << "], Char --> " << static_cast<char>(kc) << std::endl;
     if (static_cast<char>(kc) == 'q') {

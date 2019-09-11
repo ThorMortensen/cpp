@@ -49,14 +49,19 @@ public:
   void jumpLinesDown(int amount);
   void jumpLinesUp(int amount);
 
-  char getKeyPress() const;
+  KeyCode getKeyPress();
 
   void caretShow(bool isShowing) const;
 
   void printDbgKeyPress() const;
+
+  std::string inputStr;
+
+
 private:
   Coordinate_s curserPos = {0};
   void curserAction(const std::string_view& cmd) const;
+  void setRawTerminal(bool isRaw) const;
 
   constexpr static const char ESC_START[] = "\e[";
   // Movement
@@ -81,10 +86,10 @@ private:
   constexpr static const char CS_ALL[] = "2J"; // Clear entire screen	ED2
 
 
-  // #define CURSER_COMMANDS(CURSER_COMMAND)                                        \
-//   /*             name ,   value      */                                        \
-//   CURSER_COMMAND(CLEAR_LINE, "[H")                                             \
-//   CURSER_COMMAND(SAVE, "[s")                                                   \
+  // #define CURSER_COMMANDS(CURSER_COMMAND)                                        
+//   /*             name ,   value      */                                        
+//   CURSER_COMMAND(CLEAR_LINE, "[H")                                             
+//   CURSER_COMMAND(SAVE, "[s")                                                   
 //   CURSER_COMMAND(LOAD, "[u")
 
   // #define GENERATE_ENUM(name, val) name##_e,
