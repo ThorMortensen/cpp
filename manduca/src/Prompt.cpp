@@ -3,31 +3,36 @@
 
 namespace Manduca {
 
+Prompt::Prompt(std::string nameHistDB): dbName(nameHistDB) {}
+
+std::string Prompt::ask(const std::string &question, std::string defaultAnsw){
+  
+}
+
+
+
 int32_t Prompt::choose(const std::string &question,
                        const std::vector<std::string> &options) {
-  int32_t optCount = static_cast<int>(options.size());
+  int32_t optCount = static_cast<int>(options.size()) - 1;
   int32_t selection = 0;
   bool done = false;
   KeyCode kIn = KeyCode::NOP;
 
   std::cout << question << std::endl;
+  c.caretShow(false);
 
   while (!done) {
 
-    for (int32_t i = 0; i < optCount; i++) {
+    for (int32_t i = 0; i <= optCount; i++) {
       if (i == selection) {
-        std::cout << mDye::green("‣ ") << mDye::green(options[i]);
+        std::cout << mDye::green("‣ " + mDye::bold(options[i]));
       } else {
         std::cout << "  " << options[i];
       }
-      if (i < optCount - 1) {
+      if (i < optCount) {
         std::cout << "\n";
       }
     }
-    
-    c.jumpLinesUp(optCount);
-    c.caretShow(false);
-    c.flush();
 
     kIn = c.getKeyPress();
 
@@ -36,9 +41,7 @@ int32_t Prompt::choose(const std::string &question,
       selection--;
       break;
     case KeyCode::DOWN:
-      if (selection < static_cast<int>(options.size())) {
-        selection++;
-      }
+      selection++;
       break;
     case KeyCode::ENTER:
       done = true;
@@ -46,7 +49,18 @@ int32_t Prompt::choose(const std::string &question,
     default:
       break;
     }
+
+    if (selection > optCount) {
+      selection = optCount;
+    } else if (selection < 0) {
+      selection = 0;
+    }
+
+    c.jumpLinesUp(optCount);
+    c.flush();
   }
+
+  c.caretShow(true);
 
   return selection;
 }
