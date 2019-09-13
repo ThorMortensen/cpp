@@ -74,7 +74,11 @@
 			"ios": "cpp",
 			"locale": "cpp",
 			"queue": "cpp",
-			"stack": "cpp"
+			"stack": "cpp",
+			"filesystem": "cpp",
+			"codecvt": "cpp",
+			"numeric": "cpp",
+			"random": "cpp"
 		},
 	}
 }

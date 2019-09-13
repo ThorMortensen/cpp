@@ -8,10 +8,13 @@ file(GLOB allFiles
     "src/*.cpp"
 )
 
+
+# -lstdc++fs
+
 # Create the executable
 add_executable(${PROJECT_NAME}.out ${allFiles})
 target_include_directories(${PROJECT_NAME}.out PRIVATE "include")
-
+target_link_libraries(${PROJECT_NAME}.out stdc++fs)
 
 # target_link_libraries(${PROJECT_NAME}
 #     sub::lib1

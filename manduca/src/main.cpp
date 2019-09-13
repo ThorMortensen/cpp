@@ -2,6 +2,7 @@
 #include "Manduca.hpp"
 #include <iostream>
 #include <unistd.h>
+#include "Recollection.hpp"
 
 void testBound() {
   // Manduca::bound<int> f(0, 0, 10);
@@ -66,16 +67,25 @@ void stringTests() {
   std::cout << ts.capacity() << std::endl;
 }
 
+
+void recollectionTests(){
+  Manduca::Recollection r("manduca-10000-test-sorted");
+  r.test();
+  
+
+}
+
 int main(/* int argc, char const *argv[] */) {
 
-  std::cout << "prompt test starts..." << std::endl;
+  // std::cout << "prompt test starts..." << std::endl;
 
   // keyCodeDbg();
-  testPrompt();
+  // testPrompt();
   // testCurserMovement();
   // stringTests();
+  recollectionTests();
 
-  std::cout << "prompt test ends..." << std::endl;
+  // std::cout << "prompt test ends..." << std::endl;
 
   return 0;
 }
