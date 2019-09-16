@@ -26,8 +26,6 @@ public:
   void test();
   void dbgPrint();
 
-  void sortData();
-
 private:
 
 
@@ -35,7 +33,10 @@ private:
   std::filesystem::path folder;
   std::filesystem::path absPath;
   size_t historyLimit;
+
   std::vector<std::string> data;
   std::vector<int32_t> history;
+  std::vector<std::string> newData;
+
 };
 } // namespace Manduca
