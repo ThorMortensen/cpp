@@ -3,13 +3,35 @@
 
 namespace Manduca {
 
-Prompt::Prompt(std::string nameHistDB): dbName(nameHistDB) {}
+Prompt::Prompt(const std::string &nameHistDB) : recall(nameHistDB) {}
 
-std::string Prompt::ask(const std::string &question, std::string defaultAnsw){
+Prompt::Prompt() : recall("") {}
+
+std::string Prompt::ask(const std::string &question, std::string &defaultAnsw) {
+  bool done = false;
+  KeyCode kIn = KeyCode::NOP;
+  string suggestion;
   
+
+  std::cout << question << mDye::gray(suggestion);
+
+  while (!done) {
+    kIn = c.getKeyPress();
+
+    switch (kIn) {
+    case KeyCode::UP:
+      break;
+    case KeyCode::DOWN:
+      break;
+    case KeyCode::ENTER:
+      done = true;
+      break;
+    default:
+      suggestion = recall.suggest(static_cast<char>(kIn));
+      break;
+    }
+  }
 }
-
-
 
 int32_t Prompt::choose(const std::string &question,
                        const std::vector<std::string> &options) {

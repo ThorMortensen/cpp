@@ -8,9 +8,9 @@ namespace Manduca {
 class Recollection {
 public:
   // Recollection() = default;
-  Recollection(const std::string& fileName,
-               size_t historyLimit = 10000
-               );
+  Recollection(const std::string &fileName, size_t historyLimit = 10000);
+  // Recollection();
+
   Recollection(Recollection &&) = default;
   Recollection(const Recollection &) = default;
   Recollection &operator=(Recollection &&) = default;
@@ -21,13 +21,12 @@ public:
   void store();
   void merge();
   // std::string proposeCandidate(std::string fromStr);
-  std::string suggest(char nextChar);
+  auto suggest(const std::string &suggestionSeed);
 
   void test();
   void dbgPrint();
 
 private:
-
 
   std::string fileName;
   std::filesystem::path folder;
@@ -37,6 +36,5 @@ private:
   std::vector<std::string> data;
   std::vector<int32_t> history;
   std::vector<std::string> newData;
-
 };
 } // namespace Manduca

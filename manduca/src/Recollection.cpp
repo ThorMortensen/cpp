@@ -18,6 +18,12 @@ Recollection::Recollection(const std::string &fileName, size_t historyLimit)
   absPath = folder / fileName;
 }
 
+// Recollection::Recollection(){}
+
+auto Recollection::suggest(const std::string &suggestionSeed) {
+  return std::lower_bound(data.begin(), data.end(), suggestionSeed);
+}
+
 void Recollection::dbgPrint() {
   std::cout << "fileName: " << fileName << std::endl;
   std::cout << "folder: " << folder << std::endl;
@@ -47,7 +53,8 @@ void Recollection::store() {
     return;
   }
   std::sort(data.begin(), data.end());
-  std::copy(data.begin(), data.end(), std::ostream_iterator<std::string>(hf, "\n"));
+  std::copy(data.begin(), data.end(),
+            std::ostream_iterator<std::string>(hf, "\n"));
 }
 
 void Recollection::test() {
