@@ -16,7 +16,7 @@ std::string Prompt::ask(const std::string &question,
   std::string ppStr;
 
   recall.load();
-  // string suggestion;
+  recall.dbgPrint();
 
   std::cout << question << mDye::gray(suggestion);
 
@@ -37,13 +37,16 @@ std::string Prompt::ask(const std::string &question,
       break;
     }
     c.clearLine();
-    size_t dif = inputStr.length() - suggestion.length();
-    ppStr = inputStr;
-    if (dif > 0) {
-      ppStr += mDye::gray(suggestion.substr(inputStr.length(), dif));
+    if (int32_t dif = suggestion.length() - inputStr.length()) {
+      std::string pp =
+          inputStr +
+          mDye::dim(mDye::gray(suggestion.substr(inputStr.length(), dif)));
+      std::cout << question << pp;
+      c.move(Curser::Direction_e::LEFT, dif);
+    } else {
+      std::cout << question << inputStr;
     }
   }
-  std::cout << question << ppStr;
 
   return inputStr;
 } // namespace Manduca

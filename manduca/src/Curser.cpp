@@ -35,7 +35,10 @@ void Curser::jumpLinesUp(int amount) {
   std::cout << "\r";
 }
 
-void Curser::clearLine() {}
+void Curser::clearLine() {
+  curserAction(CL_ALL);
+  std::cout << "\r";
+}
 
 void Curser::clearDown() {
   curserAction(CS_D);

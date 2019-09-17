@@ -38,7 +38,7 @@ namespace Manduca::Color
   std::string bg_cyan(const std::string &str)        {return "\e[46m"+str+"\e[0m" ;}
   std::string bg_gray(const std::string &str)        {return "\e[47m"+str+"\e[0m" ;}
 
-  std::string bold(const std::string &str)           {return "\e[1m"+str+"\e[22m" ;}
+  std::string bold(const std::string &str)           {return "\e[1m"+str+"\e[0m" ;}
   std::string dim(const std::string &str)            {return "\e[2m"+str+"\e[22m" ;}
   std::string italic(const std::string &str)         {return "\e[3m"+str+"\e[23m" ;}
   std::string underline(const std::string &str)      {return "\e[4m"+str+"\e[24m" ;}

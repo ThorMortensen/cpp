@@ -24,6 +24,14 @@ void testBound() {
 
 void testCurserMovement() {
   Manduca::Curser c;
+  std::cout << "hello world";
+  c.clearLine();
+  std::cout << "987654321";
+  c.move(Manduca::Curser::Direction_e::LEFT, 6);
+  std::string foo;
+  std::cin >> foo;
+
+  return;
 
   for (int i = 0; i < 10; i++) {
     // c.print(std::to_string(i) + "\n");
@@ -75,17 +83,16 @@ void recollectionTests() {
 void testPromptAsk() {
   Manduca::Prompt p("manduca-10000-test-sorted");
   p.ask("Enter something ~> ");
-
-
 }
 
 int main(/* int argc, char const *argv[] */) {
 
-  // std::cout << "prompt test starts..." << std::endl;
   testPromptAsk();
+  // testCurserMovement();
+
+  // std::cout << "prompt test starts..." << std::endl;
   // keyCodeDbg();
   // testPromptChoose();
-  // testCurserMovement();
   // stringTests();
   // recollectionTests();
 

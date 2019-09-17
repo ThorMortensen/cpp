@@ -33,6 +33,7 @@ private:
 
   std::vector<std::string>::iterator dataIt;
 
+  constexpr static int DBG_PEEK_SIZE = 10;
 
   std::string fileName;
   std::string folder;
