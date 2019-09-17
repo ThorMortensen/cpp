@@ -1,6 +1,5 @@
 #pragma once
 
-#include <filesystem>
 #include <string>
 #include <vector>
 
@@ -36,8 +35,8 @@ private:
 
 
   std::string fileName;
-  std::filesystem::path folder;
-  std::filesystem::path absPath;
+  std::string folder;
+  std::string absPath;
   size_t historyLimit;
 
   std::vector<std::string> data;

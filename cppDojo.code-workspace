@@ -78,7 +78,10 @@
 			"filesystem": "cpp",
 			"codecvt": "cpp",
 			"numeric": "cpp",
-			"random": "cpp"
+			"random": "cpp",
+			"hash_map": "cpp",
+			"list": "cpp",
+			"cinttypes": "cpp"
 		},
 	}
 }

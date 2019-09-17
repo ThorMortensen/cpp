@@ -22,7 +22,7 @@ public:
   int32_t choose(const std::string &question,
                  const std::vector<std::string> &options);
 
-  std::string ask(const std::string &question, std::string &defaultAnsw);
+  std::string ask(const std::string &question, const std::string &defaultAnsw = "");
 
 private:
   Curser c;

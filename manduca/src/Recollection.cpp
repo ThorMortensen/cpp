@@ -8,21 +8,20 @@
 
 namespace Manduca {
 
-namespace fs = std::filesystem;
 
 Recollection::Recollection(const std::string &fileName, size_t historyLimit)
     : fileName(fileName), historyLimit(historyLimit) {
 
-  fs::path home(getenv("HOME"));
-  folder = home / ".manduca-history";
-  absPath = folder / fileName;
+  std::string home(getenv("HOME"));
+  folder = home + "/.manduca-history";
+  absPath = folder + fileName;
 }
 
 // Recollection::Recollection(){}
 
 std::string Recollection::suggest(const std::string &suggestionSeed) {
   dataIt = std::lower_bound(data.begin(), data.end(), suggestionSeed);
-  return dataIt;
+  return *dataIt;
 }
 
 void Recollection::dbgPrint() {
@@ -30,19 +29,19 @@ void Recollection::dbgPrint() {
   std::cout << "folder: " << folder << std::endl;
   std::cout << "absPath: " << absPath << std::endl;
   std::cout << "historyLimit: " << historyLimit << std::endl;
-  std::cout << "fs::exists(absPath): " << fs::exists(absPath) << std::endl;
+  // std::cout << "fs::exists(absPath): " << fs::exists(absPath) << std::endl;
 }
 
 void Recollection::load() {
 
-  if (fs::exists(absPath)) {
+  // if (fs::exists(absPath)) {
     std::ifstream hf(absPath, std::ifstream::in);
     std::string line;
     data.reserve(historyLimit);
     while (std::getline(hf, line)) {
       data.emplace_back(std::move(line));
     }
-  }
+  // }
 }
 
 void Recollection::store() {

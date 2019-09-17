@@ -7,13 +7,16 @@ Prompt::Prompt(const std::string &nameHistDB) : recall(nameHistDB) {}
 
 Prompt::Prompt() : recall("") {}
 
-std::string Prompt::ask(const std::string &question, std::string &defaultAnsw) {
+std::string Prompt::ask(const std::string &question,
+                        const std::string &defaultAnsw) {
   bool done = false;
   KeyCode kIn = KeyCode::NOP;
   std::string suggestion = defaultAnsw;
   std::string inputStr;
+  std::string ppStr;
+
+  recall.load();
   // string suggestion;
-  
 
   std::cout << question << mDye::gray(suggestion);
 
@@ -33,8 +36,17 @@ std::string Prompt::ask(const std::string &question, std::string &defaultAnsw) {
       suggestion = recall.suggest(inputStr);
       break;
     }
+    c.clearLine();
+    size_t dif = inputStr.length() - suggestion.length();
+    ppStr = inputStr;
+    if (dif > 0) {
+      ppStr += mDye::gray(suggestion.substr(inputStr.length(), dif));
+    }
   }
-}
+  std::cout << question << ppStr;
+
+  return inputStr;
+} // namespace Manduca
 
 int32_t Prompt::choose(const std::string &question,
                        const std::vector<std::string> &options) {

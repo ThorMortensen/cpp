@@ -1,8 +1,8 @@
 #include "Curser.hpp"
 #include "Manduca.hpp"
+#include "Recollection.hpp"
 #include <iostream>
 #include <unistd.h>
-#include "Recollection.hpp"
 
 void testBound() {
   // Manduca::bound<int> f(0, 0, 10);
@@ -43,7 +43,7 @@ void testCurserMovement() {
   c.flush();
 }
 
-void testPrompt() {
+void testPromptChoose() {
   std::vector<std::string> opt = {"one", "two", "three", "four"};
   Manduca::Prompt prompt;
 
@@ -67,23 +67,27 @@ void stringTests() {
   std::cout << ts.capacity() << std::endl;
 }
 
-
-void recollectionTests(){
+void recollectionTests() {
   Manduca::Recollection r("manduca-10000-test-sorted");
   r.test();
-  
+}
+
+void testPromptAsk() {
+  Manduca::Prompt p("manduca-10000-test-sorted");
+  p.ask("Enter something ~> ");
+
 
 }
 
 int main(/* int argc, char const *argv[] */) {
 
   // std::cout << "prompt test starts..." << std::endl;
-
+  testPromptAsk();
   // keyCodeDbg();
-  // testPrompt();
+  // testPromptChoose();
   // testCurserMovement();
   // stringTests();
-  recollectionTests();
+  // recollectionTests();
 
   // std::cout << "prompt test ends..." << std::endl;
 
