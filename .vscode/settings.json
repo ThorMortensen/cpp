@@ -49,6 +49,10 @@
         "utility": "cpp",
         "fstream": "cpp",
         "sstream": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "chrono": "cpp",
+        "codecvt": "cpp",
+        "filesystem": "cpp",
+        "ratio": "cpp"
     }
 }

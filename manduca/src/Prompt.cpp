@@ -10,7 +10,9 @@ Prompt::Prompt() : recall("") {}
 std::string Prompt::ask(const std::string &question, std::string &defaultAnsw) {
   bool done = false;
   KeyCode kIn = KeyCode::NOP;
-  string suggestion;
+  std::string suggestion = defaultAnsw;
+  std::string inputStr;
+  // string suggestion;
   
 
   std::cout << question << mDye::gray(suggestion);
@@ -27,7 +29,8 @@ std::string Prompt::ask(const std::string &question, std::string &defaultAnsw) {
       done = true;
       break;
     default:
-      suggestion = recall.suggest(static_cast<char>(kIn));
+      inputStr += static_cast<char>(kIn);
+      suggestion = recall.suggest(inputStr);
       break;
     }
   }

@@ -20,8 +20,9 @@ Recollection::Recollection(const std::string &fileName, size_t historyLimit)
 
 // Recollection::Recollection(){}
 
-auto Recollection::suggest(const std::string &suggestionSeed) {
-  return std::lower_bound(data.begin(), data.end(), suggestionSeed);
+std::string Recollection::suggest(const std::string &suggestionSeed) {
+  dataIt = std::lower_bound(data.begin(), data.end(), suggestionSeed);
+  return dataIt;
 }
 
 void Recollection::dbgPrint() {

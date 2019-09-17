@@ -21,12 +21,19 @@ public:
   void store();
   void merge();
   // std::string proposeCandidate(std::string fromStr);
-  auto suggest(const std::string &suggestionSeed);
+  
+  std::string suggest(const std::string &suggestionSeed);
+  std::string nextSuggestion();
+  std::string prevSuggestion();
+
 
   void test();
   void dbgPrint();
 
 private:
+
+  std::vector<std::string>::iterator dataIt;
+
 
   std::string fileName;
   std::filesystem::path folder;
