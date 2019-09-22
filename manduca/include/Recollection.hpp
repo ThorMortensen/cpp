@@ -19,18 +19,26 @@ public:
   void load();
   void store();
   void merge();
-  // std::string proposeCandidate(std::string fromStr);
   
   std::string suggest(const std::string &suggestionSeed);
   std::string nextSuggestion();
   std::string prevSuggestion();
 
-
   void test();
   void dbgPrint();
 
+  int32_t getPos() const;
+
 private:
 
+  enum class State {
+    START,
+    SEARCHING,
+
+   };
+
+  State state = State::START;
+  std::string searchStr;
   std::vector<std::string>::iterator dataIt;
 
   constexpr static int DBG_PEEK_SIZE = 10;

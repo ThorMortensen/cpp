@@ -16,10 +16,13 @@ Recollection::Recollection(const std::string &fileName, size_t historyLimit)
   absPath = folder + "/" + fileName;
 }
 
-// Recollection::Recollection(){}
+int32_t Recollection::getPos() const{
+  return dataIt - data.begin();
+}
+
 
 std::string Recollection::suggest(const std::string &suggestionSeed) {
-  dataIt = std::lower_bound(data.begin(), data.end(), suggestionSeed);
+  dataIt = std::lower_bound(dataIt, data.end(), suggestionSeed);
   return *dataIt;
 }
 
@@ -38,8 +41,6 @@ void Recollection::dbgPrint() {
   }
 
   std::cout << std::endl;
-
-
   // std::cout << "fs::exists(absPath): " << fs::exists(absPath) << std::endl;
 }
 
@@ -52,6 +53,7 @@ void Recollection::load() {
   while (std::getline(hf, line)) {
     data.emplace_back(std::move(line));
   }
+  dataIt = data.begin();
   // }
 }
 

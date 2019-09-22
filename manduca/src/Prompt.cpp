@@ -21,6 +21,8 @@ std::string Prompt::ask(const std::string &question,
   std::cout << question << mDye::gray(suggestion);
 
   while (!done) {
+    // std::cout << std::endl;
+
     kIn = c.getKeyPress();
 
     switch (kIn) {
@@ -31,13 +33,20 @@ std::string Prompt::ask(const std::string &question,
     case KeyCode::ENTER:
       done = true;
       break;
+    // case KeyCode::BACK_SPACE:
+    //   if (!inputStr.empty()) {
+    //     inputStr.pop_back();
+    //     suggestion = recall.suggest(inputStr);
+    //   }
+    //   break;
     default:
       inputStr += static_cast<char>(kIn);
       suggestion = recall.suggest(inputStr);
       break;
     }
     c.clearLine();
-    if (int32_t dif = suggestion.length() - inputStr.length()) {
+    int32_t dif = suggestion.length() - inputStr.length();
+    if (dif >= 0) {
       std::string pp =
           inputStr +
           mDye::dim(mDye::gray(suggestion.substr(inputStr.length(), dif)));
@@ -46,10 +55,12 @@ std::string Prompt::ask(const std::string &question,
     } else {
       std::cout << question << inputStr;
     }
+    // std::cout << " " << recall.getPos();
   }
 
+
   return inputStr;
-} // namespace Manduca
+} 
 
 int32_t Prompt::choose(const std::string &question,
                        const std::vector<std::string> &options) {
