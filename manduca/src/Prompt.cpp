@@ -8,7 +8,7 @@ Prompt::Prompt(const std::string &nameHistDB) : recall(nameHistDB) {}
 Prompt::Prompt() : recall("") {}
 
 std::string Prompt::ask(const std::string &question,
-                        const std::string &defaultAnsw) {
+                        const std::string &defaultAnsw){
   bool done = false;
   KeyCode kIn = KeyCode::NOP;
   std::string suggestion = defaultAnsw;
@@ -27,18 +27,20 @@ std::string Prompt::ask(const std::string &question,
 
     switch (kIn) {
     case KeyCode::UP:
+      suggestion = recall.suggestNext(inputStr);
       break;
     case KeyCode::DOWN:
+      suggestion = recall.suggestPrev(inputStr);
       break;
     case KeyCode::ENTER:
       done = true;
       break;
-    // case KeyCode::BACK_SPACE:
-    //   if (!inputStr.empty()) {
-    //     inputStr.pop_back();
-    //     suggestion = recall.suggest(inputStr);
-    //   }
-    //   break;
+    case KeyCode::BACK_SPACE:
+      if (!inputStr.empty()) {
+        inputStr.pop_back();
+        suggestion = recall.suggest(inputStr);
+      }
+      break;
     default:
       inputStr += static_cast<char>(kIn);
       suggestion = recall.suggest(inputStr);
@@ -46,7 +48,7 @@ std::string Prompt::ask(const std::string &question,
     }
     c.clearLine();
     int32_t dif = suggestion.length() - inputStr.length();
-    if (dif >= 0) {
+    if (dif > 0) {
       std::string pp =
           inputStr +
           mDye::dim(mDye::gray(suggestion.substr(inputStr.length(), dif)));
@@ -63,7 +65,7 @@ std::string Prompt::ask(const std::string &question,
 } 
 
 int32_t Prompt::choose(const std::string &question,
-                       const std::vector<std::string> &options) {
+                       const std::vector<std::string> &options)  {
   int32_t optCount = static_cast<int>(options.size()) - 1;
   int32_t selection = 0;
   bool done = false;

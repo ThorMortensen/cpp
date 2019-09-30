@@ -16,12 +16,42 @@ Recollection::Recollection(const std::string &fileName, size_t historyLimit)
   absPath = folder + "/" + fileName;
 }
 
-int32_t Recollection::getPos() const{
-  return dataIt - data.begin();
+int32_t Recollection::getPos() const { return dataIt - data.begin(); } 
+
+std::string Recollection::suggestNext(const std::string &suggestionSeed) {
+  std::vector<std::string>::iterator dataEnd;
+
+  dataIt = std::lower_bound(data.begin(), data.end(), suggestionSeed);
+  dataEnd = std::upper_bound(data.begin(), data.end(), suggestionSeed);
+  std::cout << std::endl;
+
+  std::cout << dataIt - data.begin() << " " << dataEnd - data.begin() << std::endl;
+
+  // if (dataIt < dataEnd) {
+  //   dataIt++;
+  //   return *(dataIt);
+  // }
+  return suggestionSeed;
+}
+std::string Recollection::suggestPrev(const std::string &suggestionSeed) {
+  if (dataIt > data.begin()) {
+    return *(--dataIt);
+  }
 }
 
+std::string Recollection::recallNext() {}
+std::string Recollection::recallPrev() {}
 
 std::string Recollection::suggest(const std::string &suggestionSeed) {
+
+  if (suggestionSeed.empty()) {
+    return "";
+  }
+
+  if (suggestionSeed.length() < (*dataIt).length()) {
+    dataIt = data.begin();
+  }
+
   dataIt = std::lower_bound(dataIt, data.end(), suggestionSeed);
   return *dataIt;
 }
@@ -32,7 +62,8 @@ void Recollection::dbgPrint() {
   std::cout << "absPath: " << absPath << std::endl;
   std::cout << "historyLimit: " << historyLimit << std::endl;
 
-  std::cout << "data content (first " << DBG_PEEK_SIZE << " items): " << std::endl;
+  std::cout << "data content (first " << DBG_PEEK_SIZE
+            << " items): " << std::endl;
 
   int32_t peek = data.size() > DBG_PEEK_SIZE ? DBG_PEEK_SIZE : data.size();
 

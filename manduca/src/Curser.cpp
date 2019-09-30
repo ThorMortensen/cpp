@@ -18,29 +18,29 @@
 
 namespace Manduca {
 
-void Curser::flush() { std::cout.flush(); }
+void Curser::flush() const { std::cout.flush(); }
 
-void Curser::print(const std::string &str) {
-  curserPos.x += str.length();
+void Curser::print(const std::string &str) const {
+  // curserPos.x += str.length();
   std::cout << str;
 }
 
-void Curser::jumpLinesDown(int amount) {
+void Curser::jumpLinesDown(int amount) const{
   move(Direction_e::DOWN, amount);
   std::cout << "\r";
 }
 
-void Curser::jumpLinesUp(int amount) {
+void Curser::jumpLinesUp(int amount) const{
   move(Direction_e::UP, amount);
   std::cout << "\r";
 }
 
-void Curser::clearLine() {
+void Curser::clearLine() const{
   curserAction(CL_ALL);
   std::cout << "\r";
 }
 
-void Curser::clearDown() {
+void Curser::clearDown() const{
   curserAction(CS_D);
   flush();
 }
@@ -147,30 +147,30 @@ void Curser::curserAction(const std::string_view &cmd) const {
   std::cout << ESC_START << cmd;
 }
 
-void Curser::move(const Direction_e d) { move(d, 1); }
+void Curser::move(const Direction_e d) const { move(d, 1); }
 
-void Curser::goHome() {
+void Curser::goHome() const {
   curserAction(GHOME);
-  curserPos = {0};
+  // curserPos = {0};
 }
 
-void Curser::move(const Direction_e d, int amount) {
+void Curser::move(const Direction_e d, int amount) const {
   switch (d) {
   case Direction_e::LEFT:
     curserAction(std::to_string(amount) + LEFT);
-    curserPos.x -= amount;
+    // curserPos.x -= amount;
     break;
   case Direction_e::RIGHT:
     curserAction(std::to_string(amount) + RIGHT);
-    curserPos.x += amount;
+    // curserPos.x += amount;
     break;
   case Direction_e::UP:
     curserAction(std::to_string(amount) + UP);
-    curserPos.y += amount;
+    // curserPos.y += amount;
     break;
   case Direction_e::DOWN:
     curserAction(std::to_string(amount) + DOWN);
-    curserPos.y -= amount;
+    // curserPos.y -= amount;
     break;
   default:
     std::cout << "Defaulted in move" << std::endl;

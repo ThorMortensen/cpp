@@ -36,30 +36,24 @@ public:
     int y = 0;
   };
 
-  void move(const Direction_e d, int amount);
-  void move(const Direction_e d);
-  void print(const std::string &str);
-
-  void goHome();
-
-  void clearLine();
-  void clearDown();
-  void flush();
-
-  void jumpLinesDown(int amount);
-  void jumpLinesUp(int amount);
+  void move(const Direction_e d, int amount) const;
+  void move(const Direction_e d) const;
+  void print(const std::string &str) const;
+  void goHome() const;
+  void clearLine() const;
+  void clearDown() const;
+  void flush() const;
+  void jumpLinesDown(int amount) const;
+  void jumpLinesUp(int amount) const;
+  void caretShow(bool isShowing) const;
+  void printDbgKeyPress() const;
 
   KeyCode getKeyPress();
 
-  void caretShow(bool isShowing) const;
-
-  void printDbgKeyPress() const;
-
   std::string inputStr;
 
-
 private:
-  Coordinate_s curserPos = {0};
+  // Coordinate_s curserPos = {0};
   void curserAction(const std::string_view& cmd) const;
   void setRawTerminal(bool isRaw) const;
 

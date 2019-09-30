@@ -19,10 +19,12 @@ public:
   void load();
   void store();
   void merge();
-  
+
   std::string suggest(const std::string &suggestionSeed);
-  std::string nextSuggestion();
-  std::string prevSuggestion();
+  std::string suggestNext(const std::string &suggestionSeed);
+  std::string suggestPrev(const std::string &suggestionSeed);
+  std::string recallNext();
+  std::string recallPrev();
 
   void test();
   void dbgPrint();
@@ -30,18 +32,17 @@ public:
   int32_t getPos() const;
 
 private:
-
   enum class State {
     START,
     SEARCHING,
 
-   };
+  };
 
   State state = State::START;
   std::string searchStr;
   std::vector<std::string>::iterator dataIt;
 
-  constexpr static int DBG_PEEK_SIZE = 10;
+  constexpr static int DBG_PEEK_SIZE = 15;
 
   std::string fileName;
   std::string folder;
