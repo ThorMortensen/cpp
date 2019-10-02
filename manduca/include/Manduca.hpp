@@ -16,6 +16,10 @@
 namespace mDye = Manduca::Color;
 
 
+// #define DBP(var)
+// https://en.wikipedia.org/wiki/Variadic_macro
+// #define dbgprintf(...) realdbgprintf (__FILE__, __LINE__, __VA_ARGS__)
+
 template <class T> class bound {
 private:
   T val;
