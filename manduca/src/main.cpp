@@ -90,7 +90,7 @@ int main(/* int argc, char const *argv[] */) {
   int foo = 42;
   int bar = 24;
 
-  DBP(foo, bar)
+  DBP(foo)
 
   // testPromptAsk();
   // testCurserMovement();

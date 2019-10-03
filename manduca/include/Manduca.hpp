@@ -16,7 +16,7 @@
 namespace mDye = Manduca::Color;
 
 
-#define DBP(...) printf("%s(%d): {"#__VA_ARGS__"}-->[%d]\n", __FUNCTION__,  __LINE__, __VA_ARGS__);
+#define DBP(...) std::cout <<  __FUNCTION__ <<"( "<<__LINE__<<"): {"#__VA_ARGS__"}-->[" << __VA_ARGS__ << "]\n";
 // https://en.wikipedia.org/wiki/Variadic_macro
 // #define dbgprintf(...) realdbgprintf (__FILE__, __LINE__, __VA_ARGS__)
 
