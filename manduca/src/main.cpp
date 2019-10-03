@@ -87,7 +87,12 @@ void testPromptAsk() {
 
 int main(/* int argc, char const *argv[] */) {
 
-  testPromptAsk();
+  int foo = 42;
+  int bar = 24;
+
+  DBP(foo, bar)
+
+  // testPromptAsk();
   // testCurserMovement();
 
   // std::cout << "prompt test starts..." << std::endl;
