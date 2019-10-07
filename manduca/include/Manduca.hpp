@@ -12,13 +12,13 @@
 
 #include "Color.hpp"
 #include "Prompt.hpp"
+#include "DebugPrinter.hpp"
 
 namespace mDye = Manduca::Color;
 
 
-#define DBP(...) std::cout <<  __FUNCTION__ <<"( "<<__LINE__<<"): {"#__VA_ARGS__"}-->[" << __VA_ARGS__ << "]\n";
-// https://en.wikipedia.org/wiki/Variadic_macro
-// #define dbgprintf(...) realdbgprintf (__FILE__, __LINE__, __VA_ARGS__)
+
+
 
 template <class T> class bound {
 private:

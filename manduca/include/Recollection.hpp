@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+
 namespace Manduca {
 class Recollection {
 public:
@@ -27,6 +28,8 @@ public:
   std::string recallPrev();
 
   void test();
+  void dbgPrintContent();
+
   void dbgPrint();
 
   int32_t getPos() const;

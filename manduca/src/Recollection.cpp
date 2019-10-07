@@ -5,6 +5,7 @@
 #include <stdlib.h> /* getenv */
 
 #include "Recollection.hpp"
+#include "DebugPrinter.hpp"
 
 namespace Manduca {
 
@@ -56,22 +57,27 @@ std::string Recollection::suggest(const std::string &suggestionSeed) {
   return *dataIt;
 }
 
+
+void Recollection::dbgPrintContent(){
+  ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, data, dataIt, dataIt);
+}
+
 void Recollection::dbgPrint() {
   std::cout << "fileName: " << fileName << std::endl;
   std::cout << "folder: " << folder << std::endl;
   std::cout << "absPath: " << absPath << std::endl;
   std::cout << "historyLimit: " << historyLimit << std::endl;
 
-  std::cout << "data content (first " << DBG_PEEK_SIZE
-            << " items): " << std::endl;
+  // std::cout << "data content (first " << DBG_PEEK_SIZE
+  //           << " items): " << std::endl;
 
-  int32_t peek = data.size() > DBG_PEEK_SIZE ? DBG_PEEK_SIZE : data.size();
+  // int32_t peek = data.size() > DBG_PEEK_SIZE ? DBG_PEEK_SIZE : data.size();
 
-  for (int i = 0; i < peek; i++) {
-    std::cout << data[i] << '\n';
-  }
+  // for (int i = 0; i < peek; i++) {
+  //   std::cout << data[i] << '\n';
+  // }
 
-  std::cout << std::endl;
+  // std::cout << std::endl;
   // std::cout << "fs::exists(absPath): " << fs::exists(absPath) << std::endl;
 }
 
@@ -102,9 +108,10 @@ void Recollection::store() {
 }
 
 void Recollection::test() {
-  dbgPrint();
   load();
-  store();
+  // dbgPrint();
+  dbgPrintContent();
+  // store();
 }
 
 } // namespace Manduca

@@ -24,6 +24,8 @@ public:
 
   std::string ask(const std::string &question, const std::string &defaultAnsw = "") ;
 
+  void test();
+
 private:
   Curser c;
   Recollection recall;

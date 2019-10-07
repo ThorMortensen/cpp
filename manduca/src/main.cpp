@@ -82,17 +82,15 @@ void recollectionTests() {
 
 void testPromptAsk() {
   Manduca::Prompt p("manduca-10000-test-sorted");
-  p.ask("Enter something ~> ");
+  p.test();
+  // p.ask("Enter something ~> ");
 }
+
+
 
 int main(/* int argc, char const *argv[] */) {
 
-  int foo = 42;
-  int bar = 24;
-
-  DBP(foo)
-
-  // testPromptAsk();
+  testPromptAsk();
   // testCurserMovement();
 
   // std::cout << "prompt test starts..." << std::endl;

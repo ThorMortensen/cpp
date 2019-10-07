@@ -7,8 +7,13 @@ Prompt::Prompt(const std::string &nameHistDB) : recall(nameHistDB) {}
 
 Prompt::Prompt() : recall("") {}
 
+void Prompt::test() {
+  recall.load();
+  recall.test();
+}
+
 std::string Prompt::ask(const std::string &question,
-                        const std::string &defaultAnsw){
+                        const std::string &defaultAnsw) {
   bool done = false;
   KeyCode kIn = KeyCode::NOP;
   std::string suggestion = defaultAnsw;
@@ -60,12 +65,11 @@ std::string Prompt::ask(const std::string &question,
     // std::cout << " " << recall.getPos();
   }
 
-
   return inputStr;
-} 
+}
 
 int32_t Prompt::choose(const std::string &question,
-                       const std::vector<std::string> &options)  {
+                       const std::vector<std::string> &options) {
   int32_t optCount = static_cast<int>(options.size()) - 1;
   int32_t selection = 0;
   bool done = false;
