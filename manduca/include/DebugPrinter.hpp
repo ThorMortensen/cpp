@@ -20,6 +20,12 @@ void ppVector(int32_t lines, const T &printebleVector,
               iteratorList... iterators) {
 
   static const std::size_t itCount = sizeof...(iterators);
+  int32_t vSize = static_cast<int32_t>(printebleVector.size());
+
+  if (vSize == 0) {
+    std::cout << Color::brown("Vector is empty...\n");
+    return;
+  }
 
   struct winsize w;
   ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
@@ -34,15 +40,59 @@ void ppVector(int32_t lines, const T &printebleVector,
     lines = w.ws_row;
   }
 
-  for (size_t i = 0; i < lines; i++) {
-    for (const auto it : {iterators...}) {
-      
+  if (vSize < lines) {
+    lines = vSize;
+  }
+
+  for (const auto it : {iterators...}) {
+    
+
+    int32_t itPos = it - printebleVector.begin();
+    int32_t start = itPos - (lines / 2);
+    int32_t end = itPos + (lines / 2);
+
+    if (itPos < 0 || itPos > vSize) {
+      std::cout << Color::brown("Invalid iterator pos...\n");
+      continue;
+    }
+
+    if (start < 0) {
+      end += start * (-1);
+      start = 0;
+    }
+
+    if (end >= vSize) {
+      start += vSize - end - 1;
+      end = vSize - 1;
+    }
+
+    int32_t digitLength = std::to_string(end).length();
+    std::string fs("[%" + std::to_string(digitLength) + "d] ");
+    std::string fsItPos(
+        Color::bold(Color::green("‣[%" + std::to_string(digitLength) + "d] ")));
+
+    DBP(std::min(lines, end))
+    DBP(start)
+
+    for (int32_t i = 0; i < lines; i++) {
+      if ((start + i) == itPos) {
+        printf(fsItPos.c_str(), start + i);
+        std::cout << Color::bold(Color::green(printebleVector[start + i]))
+                  << "\n";
+      } else {
+        printf(fs.c_str(), start + i);
+        std::cout << printebleVector[start + i] << "\n";
+      }
     }
   }
 
-  printf("itCount %d\n", itCount);
-  printf("lines %d\n", w.ws_row);
-  printf("columns %d\n", w.ws_col);
+  // for (size_t i = 0; i < lines; i++) {
+  //   std::cout << printebleVector <<
+  // }
+
+  // printf("itCount %d\n", itCount);
+  // printf("lines %d\n", w.ws_row);
+  // printf("columns %d\n", w.ws_col);
 }
 
 // template<class... Args>

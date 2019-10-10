@@ -87,10 +87,34 @@ void testPromptAsk() {
 }
 
 
+void testDebugPrinter(){
+  std::vector<std::string> sv{
+    "zero",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten"
+  };
+
+  std::vector<std::string>::iterator it = sv.begin() + 0;
+  std::vector<std::string>::iterator it2 = sv.begin() + 6;
+
+
+  Manduca::ppVector<std::vector<std::string>>(3, sv, it, it2);
+
+}
 
 int main(/* int argc, char const *argv[] */) {
 
-  testPromptAsk();
+  testDebugPrinter();
+
+  // testPromptAsk();
   // testCurserMovement();
 
   // std::cout << "prompt test starts..." << std::endl;

@@ -59,7 +59,7 @@ std::string Recollection::suggest(const std::string &suggestionSeed) {
 
 
 void Recollection::dbgPrintContent(){
-  ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, data, dataIt, dataIt);
+  // ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, data, dataIt, dataIt);
 }
 
 void Recollection::dbgPrint() {
