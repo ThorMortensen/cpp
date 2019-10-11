@@ -4,6 +4,7 @@
 #include <optional>
 #include <sys/ioctl.h>
 #include <unistd.h>
+#include <sstream>
 
 #include "Color.hpp"
 
@@ -43,6 +44,9 @@ void ppVector(int32_t lines, const T &printebleVector,
   if (vSize < lines) {
     lines = vSize;
   }
+
+  std::vector<std::stringstream> sout:
+  sout.serve(lines);
 
   for (const auto it : {iterators...}) {
     
