@@ -26,11 +26,6 @@ template <typename T, typename... iteratorList>
 void ppVector(int32_t lines, const T &printebleVector,
               iteratorList... iterators) {
 
-  if (vSize == 0) {
-    std::cout << Color::brown("Vector is empty...\n");
-    return;
-  }
-
   int32_t colWidth = 15;
   int32_t dbgColSel = 0;
   int32_t vSize = static_cast<int32_t>(printebleVector.size());
@@ -40,6 +35,11 @@ void ppVector(int32_t lines, const T &printebleVector,
   struct winsize w;
 
   ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+
+  if (vSize == 0) {
+    std::cout << Color::brown("Vector is empty...\n");
+    return;
+  }
 
   if (itCount > 1) {
     int32_t maxCol = (w.ws_col / itCount);

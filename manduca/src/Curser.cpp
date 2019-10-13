@@ -42,7 +42,7 @@ void Curser::clearLine() const{
 
 void Curser::clearDown() const{
   curserAction(CS_D);
-  flush();
+  std::cout << "\r";
 }
 
 void Curser::caretShow(bool isShowing) const {

@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 
-
 namespace Manduca {
 class Recollection {
 public:
@@ -29,19 +28,24 @@ public:
 
   void test();
   void dbgPrintContent();
-
-  void dbgPrint();
+  void dbgPrintBounds();
+  void dbgPrintAttr();
 
   int32_t getPos() const;
 
 private:
+  void setBounds(const std::string &suggestionSeed);
+
+  std::vector<std::string>::iterator upperBound;
+  std::vector<std::string>::iterator lowerBound;
+
   enum class State {
-    START,
+    IN_BOUNDS,
     SEARCHING,
 
   };
 
-  State state = State::START;
+  State state = State::SEARCHING;
   std::string searchStr;
   std::vector<std::string>::iterator dataIt;
 

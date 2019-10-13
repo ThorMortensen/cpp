@@ -19,25 +19,40 @@ Recollection::Recollection(const std::string &fileName, size_t historyLimit)
 
 int32_t Recollection::getPos() const { return dataIt - data.begin(); } 
 
+void Recollection::setBounds(const std::string &suggestionSeed){
+  auto comp = [] (const std::string &a, const std::string &b ) -> bool { 
+    return (a.compare(0,b.length(),b) <= 0 );
+   };
+  lowerBound = std::lower_bound(data.begin(), data.end(), suggestionSeed, comp);
+  upperBound = std::lower_bound(data.begin(), data.end(), suggestionSeed);
+  state = State::IN_BOUNDS;
+}
+
 std::string Recollection::suggestNext(const std::string &suggestionSeed) {
-  std::vector<std::string>::iterator dataEnd;
 
-  dataIt = std::lower_bound(data.begin(), data.end(), suggestionSeed);
-  dataEnd = std::upper_bound(data.begin(), data.end(), suggestionSeed);
-  std::cout << std::endl;
-
-  std::cout << dataIt - data.begin() << " " << dataEnd - data.begin() << std::endl;
-
-  // if (dataIt < dataEnd) {
-  //   dataIt++;
-  //   return *(dataIt);
-  // }
-  return suggestionSeed;
+  if(state == State::IN_BOUNDS){
+    dataIt++;
+    if(dataIt == lowerBound){
+      dataIt = upperBound;
+    }
+  } else{
+    setBounds(suggestionSeed);
+      dataIt = upperBound + 1;
+  }
+  return *dataIt;
 }
 std::string Recollection::suggestPrev(const std::string &suggestionSeed) {
-  if (dataIt > data.begin()) {
-    return *(--dataIt);
+
+  if(state == State::IN_BOUNDS){
+    dataIt--;
+    if(dataIt == upperBound - 1){
+      dataIt = lowerBound - 1;
+    }
+  } else{
+    setBounds(suggestionSeed);
+      dataIt = lowerBound - 1;
   }
+  return *dataIt;
 }
 
 std::string Recollection::recallNext() {}
@@ -52,33 +67,24 @@ std::string Recollection::suggest(const std::string &suggestionSeed) {
   if (suggestionSeed.length() < (*dataIt).length()) {
     dataIt = data.begin();
   }
+  state = State::SEARCHING;
 
   dataIt = std::lower_bound(dataIt, data.end(), suggestionSeed);
   return *dataIt;
 }
-
-
-void Recollection::dbgPrintContent(){
-  // ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, data, dataIt, dataIt);
+void Recollection::dbgPrintBounds(){
+  ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, data, dataIt, upperBound, lowerBound);
 }
 
-void Recollection::dbgPrint() {
+void Recollection::dbgPrintContent(){
+  ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, data, dataIt);
+}
+
+void Recollection::dbgPrintAttr() {
   std::cout << "fileName: " << fileName << std::endl;
   std::cout << "folder: " << folder << std::endl;
   std::cout << "absPath: " << absPath << std::endl;
   std::cout << "historyLimit: " << historyLimit << std::endl;
-
-  // std::cout << "data content (first " << DBG_PEEK_SIZE
-  //           << " items): " << std::endl;
-
-  // int32_t peek = data.size() > DBG_PEEK_SIZE ? DBG_PEEK_SIZE : data.size();
-
-  // for (int i = 0; i < peek; i++) {
-  //   std::cout << data[i] << '\n';
-  // }
-
-  // std::cout << std::endl;
-  // std::cout << "fs::exists(absPath): " << fs::exists(absPath) << std::endl;
 }
 
 void Recollection::load() {
@@ -91,6 +97,8 @@ void Recollection::load() {
     data.emplace_back(std::move(line));
   }
   dataIt = data.begin();
+  upperBound = data.begin();
+  lowerBound = data.end();
   // }
 }
 
@@ -109,7 +117,7 @@ void Recollection::store() {
 
 void Recollection::test() {
   load();
-  // dbgPrint();
+  dbgPrintAttr();
   dbgPrintContent();
   // store();
 }

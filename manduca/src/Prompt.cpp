@@ -7,10 +7,7 @@ Prompt::Prompt(const std::string &nameHistDB) : recall(nameHistDB) {}
 
 Prompt::Prompt() : recall("") {}
 
-void Prompt::test() {
-  recall.load();
-  recall.test();
-}
+void Prompt::test() { recall.test(); }
 
 std::string Prompt::ask(const std::string &question,
                         const std::string &defaultAnsw) {
@@ -21,7 +18,7 @@ std::string Prompt::ask(const std::string &question,
   std::string ppStr;
 
   recall.load();
-  recall.dbgPrint();
+  recall.dbgPrintAttr();
 
   std::cout << question << mDye::gray(suggestion);
 
@@ -62,7 +59,8 @@ std::string Prompt::ask(const std::string &question,
     } else {
       std::cout << question << inputStr;
     }
-    // std::cout << " " << recall.getPos();
+    std::cout << std::endl;
+    recall.dbgPrintBounds();
   }
 
   return inputStr;

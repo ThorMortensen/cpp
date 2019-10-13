@@ -82,27 +82,19 @@ void recollectionTests() {
 
 void testPromptAsk() {
   Manduca::Prompt p("manduca-10000-test-sorted");
-  p.test();
-  // p.ask("Enter something ~> ");
+  // p.test();
+  p.ask("Enter something ~> ");
 }
 
-
-void testDebugPrinter(){
+void testDebugPrinter() {
   std::vector<std::string> sv{
-    "zero",
-    "one",
-    "two",
-    "three",
-    "four",
-    "five",
-    "six",
-    "seven",
-    "eight",
-    "nine",
-    "ten",
-    "elleven",
-    "twelve",
-    "theteen",
+      "zero",  "one",   "two",  "three", "four",    "five",   "six",
+      "seven", "eight", "nine", "ten",   "elleven", "twelve", "theteen",
+  };
+
+  std::vector<int32_t> iv{
+      12331, 234,  6546, 6456,  3232,   534366, 4,  5564,
+      234,   5435, 90,   42311, 123167, 987,    44, 7775,
   };
 
   auto it = sv.begin() + 5;
@@ -111,36 +103,14 @@ void testDebugPrinter(){
   auto it4 = sv.begin() + 0;
   auto it5 = sv.begin() + 3;
 
-
   Manduca::ppVector<std::vector<std::string>>(4, sv, it, it2, it3, it4, it5);
-
 }
-
-// void testDebugPrinter(){
-//   std::vector<int32_t> sv{
-//     12331,
-//     234,
-//     6546,
-//     6456,
-//     3232,
-//     534366,
-//     4,
-//     5564,
-//     234,
-//     5435,
-//     90,
-//     42311,
-//     123167,
-//     987,
-//     44,
-//     7775,
-//   };
 
 int main(/* int argc, char const *argv[] */) {
 
-  testDebugPrinter();
+  // testDebugPrinter();
 
-  // testPromptAsk();
+  testPromptAsk();
   // testCurserMovement();
 
   // std::cout << "prompt test starts..." << std::endl;
