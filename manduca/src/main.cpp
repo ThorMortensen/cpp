@@ -99,16 +99,42 @@ void testDebugPrinter(){
     "seven",
     "eight",
     "nine",
-    "ten"
+    "ten",
+    "elleven",
+    "twelve",
+    "theteen",
   };
 
-  std::vector<std::string>::iterator it = sv.begin() + 0;
-  std::vector<std::string>::iterator it2 = sv.begin() + 6;
+  auto it = sv.begin() + 5;
+  auto it2 = sv.begin() + 6;
+  auto it3 = sv.begin() + 10;
+  auto it4 = sv.begin() + 0;
+  auto it5 = sv.begin() + 3;
 
 
-  Manduca::ppVector<std::vector<std::string>>(3, sv, it, it2);
+  Manduca::ppVector<std::vector<std::string>>(4, sv, it, it2, it3, it4, it5);
 
 }
+
+// void testDebugPrinter(){
+//   std::vector<int32_t> sv{
+//     12331,
+//     234,
+//     6546,
+//     6456,
+//     3232,
+//     534366,
+//     4,
+//     5564,
+//     234,
+//     5435,
+//     90,
+//     42311,
+//     123167,
+//     987,
+//     44,
+//     7775,
+//   };
 
 int main(/* int argc, char const *argv[] */) {
 

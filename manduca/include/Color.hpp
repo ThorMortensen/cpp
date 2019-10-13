@@ -45,4 +45,7 @@ std::string reverse_color(const std::string &str);
 
 std::string removeColor(const std::string &str);
 
+
+
+
 } // namespace Manduca::Color

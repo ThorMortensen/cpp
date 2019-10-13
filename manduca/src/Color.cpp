@@ -45,6 +45,7 @@ namespace Manduca::Color
   std::string blink(const std::string &str)          {return "\e[5m"+str+"\e[25m" ;}
   std::string reverse_color(const std::string &str)  {return "\e[7m"+str+"\e[27m" ;}
 
+  
 
   std::string removeColor(const std::string &str){
   //  std::regex ("a|e|i|o|u");
