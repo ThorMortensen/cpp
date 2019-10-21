@@ -19,6 +19,8 @@ auto debugPrint(const char *fn, int32_t ln, const char *argStr, args al) {
 
 #define DBP(...) debugPrint(__FUNCTION__, __LINE__, #__VA_ARGS__, __VA_ARGS__)
 
+#define DEFAULT_ERR_MSG std::cerr << "Defaulted in \"" << __FUNCTION__ << '(' <<__LINE__ << ")\"!! \n";
+
 // https://en.wikipedia.org/wiki/Variadic_macro
 // #define dbgprintf(...) realdbgprintf (__FILE__, __LINE__, __VA_ARGS__)
 

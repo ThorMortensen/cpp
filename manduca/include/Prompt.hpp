@@ -20,15 +20,26 @@ public:
   ~Prompt() = default;
 
   int32_t choose(const std::string &question,
-                 const std::vector<std::string> &options) ;
+                 const std::vector<std::string> &options);
 
-  std::string ask(const std::string &question, const std::string &defaultAnsw = "") ;
+  std::string ask(const std::string &question,
+                  const std::string &defaultAnsw = "");
 
   void test();
 
 private:
   Curser c;
   Recollection recall;
+  enum class CS { INSERT, APPEND, PREPEND };
+
+  CS curserState = CS::APPEND;
+
+  int32_t curserOffset = 0;
+
+  void moveCurser(KeyCode direction, std::string &inputStr,
+                  const std::string_view &suggestion);
+  void addToStr(std::string &inputStr, char ch);
+
   // std::string dbName;
 };
 

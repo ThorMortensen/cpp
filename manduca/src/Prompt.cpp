@@ -9,6 +9,50 @@ Prompt::Prompt() : recall("") {}
 
 void Prompt::test() { recall.test(); }
 
+void Prompt::moveCurser(KeyCode direction, std::string &inputStr,
+                        const std::string_view &suggestion) {
+
+  int32_t isl = static_cast<int32_t>(inputStr.length());
+
+  switch (curserState) {
+  case CS::APPEND:
+    if (direction == KeyCode::LEFT) {
+      c.move(Curser::Direction_e::LEFT);
+      curserOffset++;
+      curserState = (curserOffset == isl) ? CS::PREPEND : CS::INSERT;
+    } else {
+      if (suggestion.length() > inputStr.length()) {
+        inputStr.push_back(suggestion.at(isl));
+      }
+    }
+    break;
+  case CS::PREPEND:
+    if (direction == KeyCode::RIGHT) {
+      c.move(Curser::Direction_e::RIGHT);
+      curserOffset--;
+      curserState = (curserOffset == 0) ? CS::APPEND : CS::INSERT;
+    }
+    break;
+  case CS::INSERT:
+
+    if (direction == KeyCode::LEFT) {
+      curserOffset++;
+      if (curserOffset == 0) {
+        curserState = CS::APPEND;
+      }
+    } else {
+      curserOffset--;
+      if (curserOffset == isl) {
+        curserState = CS::PREPEND;
+      }
+    }
+    break;
+  default:
+    DEFAULT_ERR_MSG
+    break;
+  }
+}
+
 std::string Prompt::ask(const std::string &question,
                         const std::string &defaultAnsw) {
   bool done = false;
@@ -19,6 +63,9 @@ std::string Prompt::ask(const std::string &question,
 
   recall.load();
   recall.dbgPrintAttr();
+
+  // c.caretShow(true);
+
 
   std::cout << question << mDye::gray(suggestion);
 
@@ -34,20 +81,39 @@ std::string Prompt::ask(const std::string &question,
     case KeyCode::DOWN:
       suggestion = recall.suggestPrev(inputStr);
       break;
+    case KeyCode::RIGHT:
+    case KeyCode::LEFT:
+      moveCurser(kIn, inputStr, suggestion);
+      break;
     case KeyCode::ENTER:
       done = true;
       break;
     case KeyCode::BACK_SPACE:
-      if (!inputStr.empty()) {
-        inputStr.pop_back();
+      if (!inputStr.empty() && curserState != CS::PREPEND) {
+        if (curserState == CS::INSERT) {
+          inputStr.erase(inputStr.length() - curserOffset);
+          curserOffset--;
+        } else {
+          inputStr.pop_back();
+        }
         suggestion = recall.suggest(inputStr);
       }
       break;
     default:
-      inputStr += static_cast<char>(kIn);
+      char ch = static_cast<char>(kIn);
+      if (curserState == CS::APPEND) {
+        inputStr.push_back(ch);
+      } else {
+        inputStr.insert(inputStr.length() - curserOffset, 1,
+                        ch); // 1 copy of ch
+        curserOffset++;
+      }
       suggestion = recall.suggest(inputStr);
       break;
     }
+    std::cout << std::endl;
+    recall.dbgPrintBounds();
+    std::cout << std::endl;
     c.clearLine();
     int32_t dif = suggestion.length() - inputStr.length();
     if (dif > 0) {
@@ -55,12 +121,11 @@ std::string Prompt::ask(const std::string &question,
           inputStr +
           mDye::dim(mDye::gray(suggestion.substr(inputStr.length(), dif)));
       std::cout << question << pp;
-      c.move(Curser::Direction_e::LEFT, dif);
+      c.move(Curser::Direction_e::LEFT, dif + curserOffset);
     } else {
       std::cout << question << inputStr;
     }
-    std::cout << std::endl;
-    recall.dbgPrintBounds();
+
   }
 
   return inputStr;
