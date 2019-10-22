@@ -4,8 +4,8 @@
 #include <iterator>
 #include <stdlib.h> /* getenv */
 
-#include "Recollection.hpp"
 #include "DebugPrinter.hpp"
+#include "Recollection.hpp"
 
 namespace Manduca {
 
@@ -17,12 +17,12 @@ Recollection::Recollection(const std::string &fileName, size_t historyLimit)
   absPath = folder + "/" + fileName;
 }
 
-int32_t Recollection::getPos() const { return dataIt - data.begin(); } 
+int32_t Recollection::getPos() const { return dataIt - data.begin(); }
 
-void Recollection::setBounds(const std::string &suggestionSeed){
-  auto comp = [] (const std::string &a, const std::string &b ) -> bool { 
-    return (a.compare(0,b.length(),b) <= 0 );
-   };
+void Recollection::setBounds(const std::string &suggestionSeed) {
+  auto comp = [](const std::string &a, const std::string &b) -> bool {
+    return (a.compare(0, b.length(), b) <= 0);
+  };
   lowerBound = std::lower_bound(data.begin(), data.end(), suggestionSeed, comp);
   upperBound = std::lower_bound(data.begin(), data.end(), suggestionSeed);
   state = State::IN_BOUNDS;
@@ -30,27 +30,27 @@ void Recollection::setBounds(const std::string &suggestionSeed){
 
 std::string Recollection::suggestNext(const std::string &suggestionSeed) {
 
-  if(state == State::IN_BOUNDS){
+  if (state == State::IN_BOUNDS) {
     dataIt++;
-    if(dataIt == lowerBound){
+    if (dataIt == lowerBound) {
       dataIt = upperBound;
     }
-  } else{
+  } else {
     setBounds(suggestionSeed);
-      dataIt = upperBound + 1;
+    dataIt = upperBound + 1;
   }
   return *dataIt;
 }
 std::string Recollection::suggestPrev(const std::string &suggestionSeed) {
 
-  if(state == State::IN_BOUNDS){
+  if (state == State::IN_BOUNDS) {
     dataIt--;
-    if(dataIt == upperBound - 1){
+    if (dataIt == upperBound - 1) {
       dataIt = lowerBound - 1;
     }
-  } else{
+  } else {
     setBounds(suggestionSeed);
-      dataIt = lowerBound - 1;
+    dataIt = lowerBound - 1;
   }
   return *dataIt;
 }
@@ -64,19 +64,23 @@ std::string Recollection::suggest(const std::string &suggestionSeed) {
     return "";
   }
 
-  if (suggestionSeed.length() < (*dataIt).length()) {
-    dataIt = data.begin();
-  }
   state = State::SEARCHING;
 
-  dataIt = std::lower_bound(dataIt, data.end(), suggestionSeed);
-  return *dataIt;
-}
-void Recollection::dbgPrintBounds(){
-  ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, data, dataIt, upperBound, lowerBound);
+  dataIt = std::lower_bound(data.begin(), data.end(), suggestionSeed);
+
+  if (suggestionSeed.find(*dataIt, (*dataIt).length()) == std::string::npos) {
+  return "";
+  }
+    return *dataIt;
 }
 
-void Recollection::dbgPrintContent(){
+
+void Recollection::dbgPrintBounds() {
+  ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, data, dataIt, upperBound,
+                                     lowerBound);
+}
+
+void Recollection::dbgPrintContent() {
   ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, data, dataIt);
 }
 

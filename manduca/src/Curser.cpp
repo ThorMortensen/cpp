@@ -155,6 +155,9 @@ void Curser::goHome() const {
 }
 
 void Curser::move(const Direction_e d, int amount) const {
+  if (amount == 0){
+    return;
+  }
   switch (d) {
   case Direction_e::LEFT:
     curserAction(std::to_string(amount) + LEFT);

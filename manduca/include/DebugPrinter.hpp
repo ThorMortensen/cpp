@@ -6,6 +6,7 @@
 #include <sstream>
 #include <sys/ioctl.h>
 #include <unistd.h>
+#include <vector>
 
 #include "Color.hpp"
 
@@ -17,7 +18,9 @@ auto debugPrint(const char *fn, int32_t ln, const char *argStr, args al) {
   return (al);
 }
 
-#define DBP(...) debugPrint(__FUNCTION__, __LINE__, #__VA_ARGS__, __VA_ARGS__)
+#define NL std::cout << '\n';
+#define MAKER std::cout << "\n\n@@@@@@!!!MAKER!!!--------!!!MAKER!!!@@@@@@\n\n";
+#define DBP(...) debugPrint(__FUNCTION__, __LINE__, #__VA_ARGS__, __VA_ARGS__);
 
 #define DEFAULT_ERR_MSG std::cerr << "Defaulted in \"" << __FUNCTION__ << '(' <<__LINE__ << ")\"!! \n";
 

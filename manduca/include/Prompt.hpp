@@ -30,7 +30,7 @@ public:
 private:
   Curser c;
   Recollection recall;
-  enum class CS { INSERT, APPEND, PREPEND };
+  enum class CS { APPEND, INSERT, PREPEND };
 
   CS curserState = CS::APPEND;
 
