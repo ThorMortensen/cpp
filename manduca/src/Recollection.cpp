@@ -13,7 +13,8 @@ Recollection::Recollection(const std::string &fileName, size_t historyLimit)
     : fileName(fileName), historyLimit(historyLimit) {
 
   std::string home(getenv("HOME"));
-  folder = home + "/.manduca-history";
+  // folder = home + "/.manduca-history";
+  folder = home + "/cppDojo/testingGround";
   absPath = folder + "/" + fileName;
 }
 
@@ -68,12 +69,16 @@ std::string Recollection::suggest(const std::string &suggestionSeed) {
 
   dataIt = std::lower_bound(data.begin(), data.end(), suggestionSeed);
 
-  if (suggestionSeed.find(*dataIt, (*dataIt).length()) == std::string::npos) {
-  return "";
+  if ((*dataIt).length() < suggestionSeed.length()) {
+    return "";
   }
-    return *dataIt;
-}
 
+  if ((*dataIt).compare(0, suggestionSeed.length(), suggestionSeed) == 0) {
+    return *dataIt;
+  }
+
+  return "";
+}
 
 void Recollection::dbgPrintBounds() {
   ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, data, dataIt, upperBound,
