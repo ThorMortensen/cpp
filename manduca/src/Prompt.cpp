@@ -89,8 +89,13 @@ std::string Prompt::ask(const std::string &question,
     case KeyCode::BACK_SPACE:
       if (!inputStr.empty() && curserState != CS::PREPEND) {
         if (curserState == CS::INSERT) {
-          inputStr.erase(inputStr.length() - curserOffset + 2);
-          // curserOffset--;
+          DBP(inputStr)
+          inputStr.erase(inputStr.length() - curserOffset - 1,
+                         1); // remove 1 char
+          DBP(inputStr)
+          if (curserOffset == static_cast<int32_t>(inputStr.length())) {
+            curserState = CS::PREPEND;
+          }
         } else {
           inputStr.pop_back();
         }
@@ -117,7 +122,7 @@ std::string Prompt::ask(const std::string &question,
       std::string pp =
           inputStr +
           mDye::dim(mDye::gray(suggestion.substr(inputStr.length(), dif)));
-      std::cout << question << pp; 
+      std::cout << question << pp;
     } else {
       dif = 0;
       std::cout << question << inputStr;
