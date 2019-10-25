@@ -14,7 +14,12 @@ enum class KeyCode : int {
   LEFT,
   ENTER = 13,
   BACK_SPACE = 127,
-  TAB = 9
+  TAB = 9,
+  ESC = 27,
+  END = 70,
+  HOME = 72,
+  DEL_START = 51,
+  DEL = 126,
 };
 
 } // namespace Manduca

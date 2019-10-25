@@ -86,6 +86,17 @@ std::string Prompt::ask(const std::string &question,
     case KeyCode::ENTER:
       done = true;
       break;
+    case KeyCode::NOP:
+      break;
+    case KeyCode::DEL:
+      DBP("DELETE")
+      break;
+    case KeyCode::TAB:
+      if (suggestion.length() > 0) {
+        inputStr = suggestion;
+        curserOffset = 0;
+      }
+      break;
     case KeyCode::BACK_SPACE:
       if (!inputStr.empty() && curserState != CS::PREPEND) {
         if (curserState == CS::INSERT) {

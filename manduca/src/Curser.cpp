@@ -25,22 +25,22 @@ void Curser::print(const std::string &str) const {
   std::cout << str;
 }
 
-void Curser::jumpLinesDown(int amount) const{
+void Curser::jumpLinesDown(int amount) const {
   move(Direction_e::DOWN, amount);
   std::cout << "\r";
 }
 
-void Curser::jumpLinesUp(int amount) const{
+void Curser::jumpLinesUp(int amount) const {
   move(Direction_e::UP, amount);
   std::cout << "\r";
 }
 
-void Curser::clearLine() const{
+void Curser::clearLine() const {
   curserAction(CL_ALL);
   std::cout << "\r";
 }
 
-void Curser::clearDown() const{
+void Curser::clearDown() const {
   curserAction(CS_D);
   std::cout << "\r";
 }
@@ -91,7 +91,20 @@ KeyCode Curser::getKeyPress() {
 
     case KeyCode::FUNC_CONF:
       state = nextState;
-      readingInput = false;
+      if (nextState == KeyCode::DEL_START) {
+        state = nextState;
+      } else {
+        readingInput = false;
+      }
+      break;
+
+    case KeyCode::DEL_START:
+      if (nextState == KeyCode::DEL) {
+        state = nextState;
+      } else {
+        state = KeyCode::NOP;
+        readingInput = false;
+      }
       break;
 
     default:
@@ -155,7 +168,7 @@ void Curser::goHome() const {
 }
 
 void Curser::move(const Direction_e d, int amount) const {
-  if (amount == 0){
+  if (amount == 0) {
     return;
   }
   switch (d) {
