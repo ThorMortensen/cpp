@@ -12,8 +12,8 @@
 #include "Manduca.hpp"
 
 // #include <conio.h>
+#include <csignal>
 #include <iostream>
-
 #include <stdio.h>
 
 namespace Manduca {
@@ -69,18 +69,24 @@ KeyCode Curser::getKeyPress() {
 
   while (readingInput) {
     c = getchar();
-    inputStr += c;
+
     nextState = static_cast<KeyCode>(c);
 
+    if (nextState == KeyCode::SIGINT_KEY) { // 3
+      setRawTerminal(false);
+      std::raise(SIGINT);
+    }
+
+    inputStr.push_back(c);
+
     switch (state) {
-    case KeyCode::NOP:
+    case KeyCode::NOP: // 0
       if (nextState != KeyCode::FUNC_START) {
         readingInput = false;
       }
       state = nextState;
       break;
-
-    case KeyCode::FUNC_START:
+    case KeyCode::FUNC_START: // 27
       if (nextState == KeyCode::FUNC_CONF) {
         state = nextState;
       } else {
@@ -88,8 +94,7 @@ KeyCode Curser::getKeyPress() {
         readingInput = false;
       }
       break;
-
-    case KeyCode::FUNC_CONF:
+    case KeyCode::FUNC_CONF: // 91
       state = nextState;
       if (nextState == KeyCode::DEL_START) {
         state = nextState;
@@ -98,14 +103,14 @@ KeyCode Curser::getKeyPress() {
       }
       break;
 
-    case KeyCode::DEL_START:
-      if (nextState == KeyCode::DEL) {
-        state = nextState;
-      } else {
-        state = KeyCode::NOP;
-        readingInput = false;
-      }
-      break;
+      // case KeyCode::DEL_START: // 51
+      //   if (nextState == KeyCode::DEL) {
+      //     state = nextState;
+      //   } else {
+      //     state = KeyCode::NOP;
+      //     readingInput = false;
+      //   }
+      //   break;
 
     default:
       state = nextState;

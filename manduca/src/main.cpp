@@ -1,8 +1,11 @@
+
+#include <iostream>
+#include <signal.h>
+#include <unistd.h>
+
 #include "Curser.hpp"
 #include "Manduca.hpp"
 #include "Recollection.hpp"
-#include <iostream>
-#include <unistd.h>
 
 void testBound() {
   // Manduca::bound<int> f(0, 0, 10);
@@ -106,6 +109,17 @@ void testDebugPrinter() {
   Manduca::ppVector<std::vector<std::string>>(4, sv, it, it2, it3, it4, it5);
 }
 
+void signalHandler(int signum) {
+  std::cout << "Interrupt signal (" << signum << ") received.\n";
+  // cleanup and close up stuff here
+  // terminate program
+  exit(signum);
+}
+
+void signalHandlerTest() {
+  signal(SIGINT, signalHandler);
+}
+
 int main(/* int argc, char const *argv[] */) {
 
   // testDebugPrinter();
@@ -114,6 +128,7 @@ int main(/* int argc, char const *argv[] */) {
   // testCurserMovement();
 
   // std::cout << "prompt test starts..." << std::endl;
+  // while(true);
   // keyCodeDbg();
   // testPromptChoose();
   // stringTests();

@@ -14,7 +14,7 @@ namespace Manduca {
 
 template <typename args>
 auto debugPrint(const char *fn, int32_t ln, const char *argStr, args al) {
-  std::cout << fn << "(" << ln << "): {" << argStr << "}-->[" << (al) << "]\n";
+  std::cout << fn << "(" << ln << "): {" << argStr << "}-->[" << (al) << "]\r\n";
   return (al);
 }
 

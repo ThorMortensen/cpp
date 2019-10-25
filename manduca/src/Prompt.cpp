@@ -88,8 +88,26 @@ std::string Prompt::ask(const std::string &question,
       break;
     case KeyCode::NOP:
       break;
+    case KeyCode::HOME:
+      curserOffset = inputStr.length();
+      break;
+    case KeyCode::END:
+      curserOffset = 0;
+      break;
     case KeyCode::DEL:
-      DBP("DELETE")
+      if (!inputStr.empty() && curserState != CS::APPEND) {
+        if (curserState == CS::INSERT) {
+          inputStr.erase(inputStr.length() - curserOffset,
+                         1); // remove 1 char
+          if (curserOffset == 0) {
+            curserState = CS::APPEND;
+          }
+        } else {
+          inputStr.erase(0, 1);
+        }
+        curserOffset--;
+        suggestion = recall.suggest(inputStr);
+      }
       break;
     case KeyCode::TAB:
       if (suggestion.length() > 0) {
@@ -100,10 +118,8 @@ std::string Prompt::ask(const std::string &question,
     case KeyCode::BACK_SPACE:
       if (!inputStr.empty() && curserState != CS::PREPEND) {
         if (curserState == CS::INSERT) {
-          DBP(inputStr)
           inputStr.erase(inputStr.length() - curserOffset - 1,
                          1); // remove 1 char
-          DBP(inputStr)
           if (curserOffset == static_cast<int32_t>(inputStr.length())) {
             curserState = CS::PREPEND;
           }
@@ -124,9 +140,9 @@ std::string Prompt::ask(const std::string &question,
       suggestion = recall.suggest(inputStr);
       break;
     }
-    std::cout << std::endl;
+    NL;
     recall.dbgPrintBounds();
-    std::cout << std::endl;
+    NL;
     c.clearLine();
     int32_t dif = suggestion.length() - inputStr.length();
     if (dif > 0) {
