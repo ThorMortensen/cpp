@@ -44,6 +44,7 @@ add_compile_options(-Wall
 
 # Add sub directories
 # add_subdirectory(helloworld)
-add_subdirectory(manduca)
+# add_subdirectory(manduca)
+add_subdirectory(workout)
 
 
