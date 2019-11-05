@@ -60,9 +60,11 @@ struct ListNode {
   ListNode(int x) : val(x), next(NULL) {}
 };
 
+// FUCKING DONE !!!!
 ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
 
   ListNode s(0);
+  ListNode d(0);
   ListNode *r;
   r = &s;
 
@@ -72,32 +74,22 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
   while (true) {
 
     if (l1 == NULL && l2 == NULL) {
-       if (rem == 1) {
-        r->next = new ListNode(1);
+      if (rem > 0) {
+        r->next = new ListNode(rem);
       }
       break;
     }
 
     if (l1 == NULL) {
-      r->next = new ListNode(l2->val);
-      l2 = l2->next;
-      continue;
+      l1 = &d;
     }
 
     if (l2 == NULL) {
-      r->next = new ListNode(l1->val);
-      l1 = l1->next;
-      continue;
+      l2 = &d;
     }
 
     res = l1->val + l2->val + rem;
-
-    if (res >= 10) {
-      rem = 1;
-    } else {
-      rem = 0;
-    }
-
+    rem = res / 10;
     r->next = new ListNode(res % 10);
 
     l1 = l1->next;
@@ -109,21 +101,21 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
 
 void addTwoNumbersTest() {
   // (2 -> 4 -> 3) + (5 -> 6 -> 4)
-  ListNode l1(9);
-  ListNode l2(8);
+  ListNode l1(2);
+  ListNode l2(4);
   ListNode l3(3);
 
   // l1.next = &l2;
   // l2.next = &l3;
 
-  ListNode n1(1);
-  // ListNode n2(6);
-  // ListNode n3(4);
+  ListNode n1(5);
+  ListNode n2(6);
+  ListNode n3(4);
 
   // n1.next = &n2;
   // n2.next = &n3;
 
-  ListNode *ln = addTwoNumbers(&l1, &n1);
+  ListNode *ln = addTwoNumbers(&n1, &n1);
 
   // ListNode *ln = &l1;
 
