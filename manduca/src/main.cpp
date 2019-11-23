@@ -84,8 +84,7 @@ void recollectionTests() {
 }
 
 void testPromptAsk() {
-  Manduca::Prompt p("manduca-10000-test-sorted");
-  // p.test();
+  Manduca::Prompt p("cppTest");
   p.ask("Enter something ~> ");
 }
 
@@ -124,7 +123,7 @@ int main(/* int argc, char const *argv[] */) {
 
   // testDebugPrinter();
 
-  testPromptAsk();
+//  testPromptAsk();
   // testCurserMovement();
 
   // std::cout << "prompt test starts..." << std::endl;
@@ -132,7 +131,7 @@ int main(/* int argc, char const *argv[] */) {
   // keyCodeDbg();
   // testPromptChoose();
   // stringTests();
-  // recollectionTests();
+   recollectionTests();
 
   // std::cout << "prompt test ends..." << std::endl;
 

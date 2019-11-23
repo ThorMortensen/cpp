@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -24,6 +25,11 @@ public:
 
   std::string ask(const std::string &question,
                   const std::string &defaultAnsw = "");
+  std::tuple<std::string, bool>
+  ask(const std::string &question, const std::string &defaultAnsw,
+      const std::function<void(const std::string &)> validate);
+  void save(const std::string &string);
+  void save();
 
   void test();
 
@@ -32,15 +38,14 @@ private:
   Recollection recall;
   enum class CS { APPEND, INSERT, PREPEND };
 
-  CS curserState = CS::APPEND;
+  CS cursorState = CS::APPEND;
 
-  int32_t curserOffset = 0;
+  int32_t cursorOffset = 0;
 
-  void moveCurser(KeyCode direction, std::string &inputStr,
+  void moveCursor(KeyCode direction, std::string &inputStr,
                   const std::string_view &suggestion);
   void addToStr(std::string &inputStr, char ch);
-
-  // std::string dbName;
+  std::string lastInputStr;
 };
 
 } // namespace Manduca
