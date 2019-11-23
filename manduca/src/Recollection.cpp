@@ -111,14 +111,15 @@ void Recollection::load() {
     data.reserve(historyLimit);
     while (std::getline(df, line)) {
       data.emplace_back(std::move(line));
+      dataToHistory.emplace_back(0);
     }
   }
 
   if (hf.good()) {
     while (std::getline(hf, line)) {
       histLine = std::stoi(line);
-//      dataToHistory.at()
       history.emplace_back(histLine);
+      dataToHistory[histLine] = histIdx++;
     }
   }
 
