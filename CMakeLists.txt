@@ -14,7 +14,7 @@ project(cppDojo VERSION 1.0
 
 add_compile_options(-Wall
                     -Wextra # reasonable and standard
-                    -Wshadow # warn the user if a variable declaration shadows one from a
+#                    -Wshadow # warn the user if a variable declaration shadows one from a
                              # parent context
                     -Wno-c++98-compat
                                 #    -Wnon-virtual-dtor # warn the user if a class with virtual functions has a

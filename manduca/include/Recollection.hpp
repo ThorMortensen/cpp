@@ -1,13 +1,14 @@
 #pragma once
 
 #include <deque>
+#include <list>
+#include <map>
 #include <string>
 #include <vector>
 
 namespace Manduca {
 class Recollection {
 public:
-
   Recollection(const std::string &fileName, size_t historyLimit = 10000);
   Recollection(Recollection &&) = default;
   Recollection(const Recollection &) = default;
@@ -34,9 +35,6 @@ public:
 private:
   void setBounds(const std::string &suggestionSeed);
 
-  std::vector<std::string>::iterator upperBound;
-  std::vector<std::string>::iterator lowerBound;
-
   enum class State {
     IN_BOUNDS,
     SEARCHING,
@@ -44,7 +42,6 @@ private:
   };
 
   State state = State::SEARCHING;
-  std::vector<std::string> ::iterator dataIt;
 
   constexpr static int DBG_PEEK_SIZE = 15;
 
@@ -54,13 +51,27 @@ private:
   inline static const std::string histPrefix = ".histIdx";
   size_t historyLimit;
 
-  std::deque<uint32_t > history;
-  std::deque<uint32_t > dataToHistory;
-  std::vector<std::string> data;
+
+  struct mhist {
+    std::map<std::string, mhist>::iterator content;
+
+  };
+
+  typedef std::map<std::string, mhist>::iterator mapIt;
+
+  std::list<mhist> history;
+  std::map<std::string, mhist> data;
+
+  mapIt dataIt;
+  mapIt upperBound;
+  mapIt lowerBound;
   uint32_t histIdx = 0;
 
   bool validDataIt = true;
 
+  std::vector<std::string> dbgPrintVector;
+  void loadDbgPrint();
+  bool dbgPrintIsLoaded = false;
 
   void save(const std::string &str);
 };

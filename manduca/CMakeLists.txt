@@ -5,9 +5,10 @@ set(CMAKE_CXX_STANDARD 17)
 
 # file(GLOB_RECURSE my_c_list RELATIVE ${CMAKE_SOURCE_DIR} "src/*")
 file(GLOB allFiles
-    "include/*.h"
-    "src/*.cpp"
-)
+  "include/*.h"
+  "src/*.cpp"
+  "test/*.cpp"
+  )
 
 
 # -lstdc++fs

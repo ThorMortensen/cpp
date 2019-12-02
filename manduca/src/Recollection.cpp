@@ -17,14 +17,9 @@ Recollection::Recollection(const std::string &fileName, size_t historyLimit)
   absPath = folder + "/" + fileName;
 }
 
-int32_t Recollection::getPos() const { return dataIt - data.begin(); }
-
 void Recollection::setBounds(const std::string &suggestionSeed) {
-  auto comp = [](const std::string &a, const std::string &b) -> bool {
-    return (a.compare(0, b.length(), b) <= 0);
-  };
-  lowerBound = std::lower_bound(data.begin(), data.end(), suggestionSeed, comp);
-  upperBound = std::lower_bound(data.begin(), data.end(), suggestionSeed);
+  lowerBound = data.lower_bound(suggestionSeed);
+  upperBound = data.upper_bound(suggestionSeed);
   state = State::IN_BOUNDS;
 }
 
@@ -35,15 +30,16 @@ std::string Recollection::suggestNext(const std::string &suggestionSeed) {
   }
 
   if (state == State::IN_BOUNDS) {
-    dataIt++;
     if (dataIt == lowerBound) {
       dataIt = upperBound;
+    }else{
+      dataIt++;
     }
   } else {
     setBounds(suggestionSeed);
-    dataIt = upperBound + 1;
+    dataIt = std::next(upperBound);
   }
-  return (*dataIt);
+  return dataIt->first;
 }
 std::string Recollection::suggestPrev(const std::string &suggestionSeed) {
 
@@ -53,25 +49,25 @@ std::string Recollection::suggestPrev(const std::string &suggestionSeed) {
 
   if (state == State::IN_BOUNDS) {
     dataIt--;
-    if (dataIt == upperBound - 1) {
-      dataIt = lowerBound - 1;
+    if (dataIt == std::prev(upperBound)) {
+      dataIt = std::prev(upperBound);
     }
   } else {
     setBounds(suggestionSeed);
-    dataIt = lowerBound - 1;
+    dataIt = std::prev(lowerBound);
   }
-  return (*dataIt);
+  return dataIt->first;
 }
 
 std::string Recollection::recallNext() {
-  dataIt = history[histIdx++] + data.begin();
-  histIdx %= history.size();
-  return (*dataIt);
+  //  dataIt = history[histIdx++] + data.begin();
+  //  histIdx %= history.size();
+  return dataIt->first;
 }
 std::string Recollection::recallPrev() {
-  dataIt = history[histIdx--] + data.begin();
-  histIdx %= history.size();
-  return (*dataIt);
+  //  dataIt = history[histIdx--] + data.begin();
+  //  histIdx %= history.size();
+  return dataIt->first;
 }
 
 std::string Recollection::suggest(const std::string &suggestionSeed) {
@@ -82,16 +78,17 @@ std::string Recollection::suggest(const std::string &suggestionSeed) {
 
   state = State::SEARCHING;
 
-  dataIt = std::lower_bound(data.begin(), data.end(), suggestionSeed);
+  dataIt = data.lower_bound(suggestionSeed);
 
-  if ((*dataIt).length() < suggestionSeed.length()) {
+  if ((dataIt->first).length() < suggestionSeed.length()) {
     validDataIt = false;
     return "";
   }
 
-  if ((*dataIt).compare(0, suggestionSeed.length(), suggestionSeed) == 0) {
+  if ((dataIt->first).compare(0, suggestionSeed.length(), suggestionSeed) ==
+      0) {
     validDataIt = true;
-    return *dataIt;
+    return dataIt->first;
   }
 
   validDataIt = false;
@@ -104,54 +101,45 @@ void Recollection::load() {
   std::ifstream df(absPath, std::ifstream::in);
   std::ifstream hf(absPath + histPrefix, std::ifstream::in);
   std::string line;
-  uint32_t histLine = 0;
-  uint32_t histIdx = 0;
 
   if (df.good()) {
-    data.reserve(historyLimit);
     while (std::getline(df, line)) {
-      data.emplace_back(std::move(line));
-      dataToHistory.emplace_back(0);
-    }
-  }
-
-  if (hf.good()) {
-    while (std::getline(hf, line)) {
-      histLine = std::stoi(line);
-      history.emplace_back(histLine);
-      dataToHistory[histLine] = histIdx++;
+      auto f = data.insert(std::make_pair(std::move(line), mhist()));
+      f.first->second.content = f.first;
+      history.push_front(f.first->second);
     }
   }
 
   dataIt = data.begin();
   upperBound = data.begin();
   lowerBound = data.end();
+  loadDbgPrint();
 }
 void Recollection::save(const std::string &str) {
-  if (validDataIt){
-    uint32_t dataLineToAdd = dataIt - data.begin();
-    history.push_front(dataLineToAdd);
-    history.erase(dataToHistory[dataLineToAdd]);
-    dataToHistory[dataLineToAdd] = 0;
-  }
 
+  if (validDataIt) {
+    //    uint32_t dataLineToAdd = dataIt - data.begin();
+    //    history.push_front(dataLineToAdd);
+    //    history.erase(dataToHistory[dataLineToAdd]);
+    //    dataToHistory[dataLineToAdd] = 0;
+  }
 }
 
 void Recollection::store() {
 
-  std::ofstream df(absPath);
-  std::ofstream hf(absPath + histPrefix);
-
-  if (!df.good() && !hf.good()) {
-    std::cerr << "Open output file's at " << absPath << " failed!!\n";
-    return;
-  }
-
-  std::copy(data.begin(), data.end(),
-            std::ostream_iterator<std::string>(df, "\n"));
-
-  std::copy(history.begin(), history.end(),
-            std::ostream_iterator<int>(hf, "\n"));
+  //  std::ofstream df(absPath);
+  //  std::ofstream hf(absPath + histPrefix);
+  //
+  //  if (!df.good() && !hf.good()) {
+  //    std::cerr << "Open output file's at " << absPath << " failed!!\n";
+  //    return;
+  //  }
+  //
+  //  std::copy(data.begin(), data.end(),
+  //            std::ostream_iterator<std::string>(df, "\n"));
+  //
+  //  std::copy(history.begin(), history.end(),
+  //            std::ostream_iterator<int>(hf, "\n"));
 }
 
 Recollection::~Recollection() {
@@ -161,13 +149,34 @@ Recollection::~Recollection() {
 // ------------------------ Debug stuff -------------------------
 
 void Recollection::dbgPrintBounds() {
-  ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, data, dataIt, upperBound,
-                                     lowerBound);
+//  if (!dbgPrintIsLoaded) {
+//    loadDbgPrint();
+//    dbgPrintIsLoaded = true;
+//  }
+
+  DBP(dbgPrintVector.size())
+  //  ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, dbgPrintVector,
+  //                                     dbgPrintVector.begin(),
+  //                                     dbgPrintVector.end());
+
+  //
+  auto d = std::upper_bound(dbgPrintVector.begin(), dbgPrintVector.end(),
+                            dataIt->first);
+
+  auto u = std::upper_bound(dbgPrintVector.begin(), dbgPrintVector.end(),
+                            upperBound->first);
+
+  auto l = std::upper_bound(dbgPrintVector.begin(), dbgPrintVector.end(),
+                            std::prev(lowerBound)->first);
+
+
+  ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, dbgPrintVector, d, u, l);
 }
 
 void Recollection::dbgPrintContent() {
-  ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, data, dataIt);
-  ppVector<std::deque<uint32_t>>(DBG_PEEK_SIZE, history, history.begin());
+
+  //  ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, data, dataIt);
+  //  ppVector<std::deque<uint32_t>>(DBG_PEEK_SIZE, history, history.begin());
 }
 
 void Recollection::dbgPrintAttr() {
@@ -181,6 +190,11 @@ void Recollection::test() {
   dbgPrintAttr();
   dbgPrintContent();
   store();
+}
+void Recollection::loadDbgPrint() {
+  for (const auto &st : data) {
+    dbgPrintVector.emplace_back(st.first);
+  }
 }
 
 } // namespace Manduca
