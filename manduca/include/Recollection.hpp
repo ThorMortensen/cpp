@@ -18,6 +18,8 @@ public:
 
   void load();
   void store();
+  void save(const std::string &str);
+
 
   std::string suggest(const std::string &suggestionSeed);
   std::string suggestNext(const std::string &suggestionSeed);
@@ -30,10 +32,7 @@ public:
   void dbgPrintBounds();
   void dbgPrintAttr();
 
-  int32_t getPos() const;
-
 private:
-  void setBounds(const std::string &suggestionSeed);
 
   enum class State {
     IN_BOUNDS,
@@ -53,26 +52,31 @@ private:
 
 
   struct mhist {
-    std::map<std::string, mhist>::iterator content;
-
+    std::map<std::string, std::list<mhist>::iterator>::iterator content;
   };
 
-  typedef std::map<std::string, mhist>::iterator mapIt;
+  typedef std::list<mhist>::const_iterator histIt_ct;
+
+  typedef std::list<mhist>::iterator histIt_t;
+  typedef std::map<std::string, std::list<mhist>::iterator>::iterator mapIt_t;
+
+
 
   std::list<mhist> history;
-  std::map<std::string, mhist> data;
+  std::map<std::string, histIt_t> data;
 
-  mapIt dataIt;
-  mapIt upperBound;
-  mapIt lowerBound;
-  uint32_t histIdx = 0;
+  mapIt_t dataIt;
+  histIt_ct histIt;
 
   bool validDataIt = true;
+  bool isLoaded = false;
 
   std::vector<std::string> dbgPrintVector;
   void loadDbgPrint();
   bool dbgPrintIsLoaded = false;
 
-  void save(const std::string &str);
+  std::string suggestNextInBounds(const std::string &suggestionSeed,
+                                  bool forward);
+  bool findSuggestion(const std::string &suggestionSeed, bool useUpperBound);
 };
 } // namespace Manduca

@@ -80,6 +80,7 @@ std::string Prompt::ask(const std::string &question,
 
     switch (kIn) {
     case KeyCode::UP:
+      MARKER
       suggestion = recall.suggestNext(inputStr);
       break;
     case KeyCode::DOWN:
@@ -90,6 +91,7 @@ std::string Prompt::ask(const std::string &question,
       moveCursor(kIn, inputStr, suggestion);
       break;
     case KeyCode::ENTER:
+      recall.save(inputStr);
       done = true;
       break;
     case KeyCode::NOP:

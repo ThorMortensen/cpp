@@ -85,7 +85,19 @@ void recollectionTests() {
 
 void testPromptAsk() {
   Manduca::Prompt p("manduca-10000-test-sorted");
-  p.ask("Enter something ~> ");
+
+  while (true){
+    auto a = p.ask("Enter something ~> ");
+    std::cout << "Done!";
+    NL
+    if (a == "q"){
+      break;
+    }
+  }
+
+
+
+
 }
 
 void testDebugPrinter() {

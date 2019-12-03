@@ -19,7 +19,7 @@ auto debugPrint(const char *fn, int32_t ln, const char *argStr, args al) {
 }
 
 #define NL std::cout << '\n';
-#define MARKER std::cout << "\n\n@@@@@@!!!MARKER!!!--------!!!MARKER!!!@@@@@@\n\n";
+#define MARKER std::cout << "\n\n" << __FUNCTION__ << "(" << __LINE__ << ") "<< "@@@@@@!!!MARKER!!!--------!!!MARKER!!!@@@@@@\n\n";
 #define DBP(...) debugPrint(__FUNCTION__, __LINE__, #__VA_ARGS__, __VA_ARGS__);
 
 #define DEFAULT_ERR_MSG std::cerr << "Defaulted in \"" << __FUNCTION__ << '(' <<__LINE__ << ")\"!! \n";
