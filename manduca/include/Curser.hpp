@@ -79,19 +79,6 @@ private:
   constexpr static const char CS_U[] = "1J";   // Clear screen from cursor up	ED1
   constexpr static const char CS_ALL[] = "2J"; // Clear entire screen	ED2
 
-
-  // #define CURSER_COMMANDS(CURSER_COMMAND)                                        
-//   /*             name ,   value      */                                        
-//   CURSER_COMMAND(CLEAR_LINE, "[H")                                             
-//   CURSER_COMMAND(SAVE, "[s")                                                   
-//   CURSER_COMMAND(LOAD, "[u")
-
-  // #define GENERATE_ENUM(name, val) name##_e,
-  // #define GENERATE_STRING(name, val) val,
-
-  //   enum CurserCmd { CURSER_COMMANDS(GENERATE_ENUM) CMD_COUNT };
-  //   std::string curserCmdStrings[CMD_COUNT] = {
-  //   CURSER_COMMANDS(GENERATE_STRING)};
 };
 
 } // namespace Manduca

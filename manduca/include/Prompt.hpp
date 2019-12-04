@@ -23,13 +23,17 @@ public:
   int32_t choose(const std::string &question,
                  const std::vector<std::string> &options);
 
+  std::string ask(const std::string &question, const std::string &defaultAnsw);
+  std::string ask(const std::string &question);
   std::string ask(const std::string &question,
-                  const std::string &defaultAnsw = "");
-  std::tuple<std::string, bool>
-  ask(const std::string &question, const std::string &defaultAnsw,
-      const std::function<void(const std::string &)> validate);
+                  std::function<bool(const std::string &answ)> validate);
+  std::string ask(const std::string &question,
+      const std::string &defaultAnsw,
+                  std::function<bool(const std::string &answ)> validate);
+
+  bool disableAutoSave = false;
+
   void save(const std::string &string);
-  void save();
 
   void test();
 
@@ -44,8 +48,9 @@ private:
 
   void moveCursor(KeyCode direction, std::string &inputStr,
                   const std::string_view &suggestion);
-  void addToStr(std::string &inputStr, char ch);
-  std::string lastInputStr;
+  void printAskPrompt(const std::string &question,
+                      const std::string &suggestion,
+                      const std::string &inputStr);
 };
 
 } // namespace Manduca

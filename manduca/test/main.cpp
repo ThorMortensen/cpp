@@ -7,24 +7,6 @@
 #include "Manduca.hpp"
 #include "Recollection.hpp"
 
-void testBound() {
-  // Manduca::bound<int> f(0, 0, 10);
-
-  // std::cout << "F is 1: [" << f.get() << "]"<< std::endl;
-
-  // f = 123;
-
-  // std::cout << "F is 2: [" << f.get() << "]"<< std::endl;
-
-  // f = 5;
-
-  // std::cout << "F is 3: [" << f.get() << "]"<< std::endl;
-
-  // f = 5;
-
-  // std::cout << "F is 3: [" << f.get() << "]"<< std::endl;
-}
-
 void testCurserMovement() {
   Manduca::Curser c;
   std::cout << "hello world";
@@ -84,20 +66,21 @@ void recollectionTests() {
 }
 
 void testPromptAsk() {
+  //    Manduca::Prompt p("cppManducaTest");
   Manduca::Prompt p("manduca-10000-test-sorted");
 
-  while (true){
-    auto a = p.ask("Enter something ~> ");
+  while (true) {
+    auto a = p.ask("Enter something ~> ", "foo is best!",
+                   [](const std::string &str) {
+      if(str != "ok"){
+        std::cout << mDye::red("\nWrong input please try again!") << '\n';
+        return false;
+      }
+      return true;
+    });
     std::cout << "Done!";
-    NL
-    if (a == "q"){
-      break;
-    }
+    NL if (a == "q") { break; }
   }
-
-
-
-
 }
 
 void testDebugPrinter() {
@@ -127,9 +110,7 @@ void signalHandler(int signum) {
   exit(signum);
 }
 
-void signalHandlerTest() {
-  signal(SIGINT, signalHandler);
-}
+void signalHandlerTest() { signal(SIGINT, signalHandler); }
 
 int main(/* int argc, char const *argv[] */) {
 
@@ -143,8 +124,8 @@ int main(/* int argc, char const *argv[] */) {
   // keyCodeDbg();
   // testPromptChoose();
   // stringTests();
-//   recollectionTests();
-
+  //   recollectionTests();
+  //  signalHandlerTest();
   // std::cout << "prompt test ends..." << std::endl;
 
   return 0;

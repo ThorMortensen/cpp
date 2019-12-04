@@ -10,18 +10,15 @@
  */
 #include "Curser.hpp"
 #include "Manduca.hpp"
-
-// #include <conio.h>
 #include <csignal>
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 
 namespace Manduca {
 
 void Curser::flush() const { std::cout.flush(); }
 
 void Curser::print(const std::string &str) const {
-  // curserPos.x += str.length();
   std::cout << str;
 }
 
@@ -103,15 +100,6 @@ KeyCode Curser::getKeyPress() {
       }
       break;
 
-      // case KeyCode::DEL_START: // 51
-      //   if (nextState == KeyCode::DEL) {
-      //     state = nextState;
-      //   } else {
-      //     state = KeyCode::NOP;
-      //     readingInput = false;
-      //   }
-      //   break;
-
     default:
       state = nextState;
       readingInput = false;
@@ -135,30 +123,6 @@ void Curser::printDbgKeyPress() const {
       return;
     }
   }
-
-  // while (true) {
-  //   // KeyCode kc = getKeyPress();
-  //   char str[256] = {0};
-  //   std::string c;
-  //   system("/bin/stty raw");
-  //   // std::cin >> c;
-  //   std::getline(std::cin, c);
-
-  //   // std::cin.get(str, 256);
-  //   c = getchar();
-  //   system("/bin/stty cooked");
-  //   // std::string c(str);
-
-  //   std::cout << "String codes [";
-  //   for (size_t i = 0; i < c.length(); i++) {
-  //     std::cout << std::to_string(static_cast<int32_t>(c[i])) << ", ";
-  //   }
-
-  //   std::cout << " Str [" << c << "]" << std::endl;
-  //   if (c == "q") {
-  //     return;
-  //   }
-  // }
 }
 
 void Curser::curserAction(const std::string_view &cmd) const {
@@ -169,7 +133,6 @@ void Curser::move(const Direction_e d) const { move(d, 1); }
 
 void Curser::goHome() const {
   curserAction(GHOME);
-  // curserPos = {0};
 }
 
 void Curser::move(const Direction_e d, int amount) const {
@@ -179,22 +142,18 @@ void Curser::move(const Direction_e d, int amount) const {
   switch (d) {
   case Direction_e::LEFT:
     curserAction(std::to_string(amount) + LEFT);
-    // curserPos.x -= amount;
     break;
   case Direction_e::RIGHT:
     curserAction(std::to_string(amount) + RIGHT);
-    // curserPos.x += amount;
     break;
   case Direction_e::UP:
     curserAction(std::to_string(amount) + UP);
-    // curserPos.y += amount;
     break;
   case Direction_e::DOWN:
     curserAction(std::to_string(amount) + DOWN);
-    // curserPos.y -= amount;
     break;
   default:
-    std::cout << "Defaulted in move" << std::endl;
+    DEFAULT_ERR_MSG
   }
 }
 

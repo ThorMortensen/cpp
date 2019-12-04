@@ -2,16 +2,31 @@
 #include <cstdlib> /* getenv */
 #include <fstream>
 #include <iostream>
-#include <iterator>
+#include <sys/stat.h>
 
 #include "DebugPrinter.hpp"
 #include "Recollection.hpp"
 
+// ============ Fix for filesystem include ==============
+#ifndef __has_include
+static_assert(false, "__has_include not supported");
+#else
+#if __has_include(<filesystem>)
+#include <filesystem>
+namespace fs = std::filesystem;
+#elif __has_include(<experimental/filesystem>)
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
+#elif __has_include(<boost/filesystem.hpp>)
+#include <boost/filesystem.hpp>
+namespace fs = boost::filesystem;
+#endif
+#endif
+// =======================================================
+
 namespace Manduca {
 
-Recollection::Recollection(const std::string &fileName, size_t historyLimit)
-    : fileName(fileName), historyLimit(historyLimit) {
-
+Recollection::Recollection(const std::string &fileName) : fileName(fileName) {
   std::string home(getenv("HOME"));
   folder = home + "/.manduca-history";
   absPath = folder + "/" + fileName;
@@ -19,6 +34,10 @@ Recollection::Recollection(const std::string &fileName, size_t historyLimit)
 
 std::string Recollection::suggestNextInBounds(const std::string &suggestionSeed,
                                               bool forward) {
+  if (data.empty()){
+    return "";
+  }
+
   if (suggestionSeed.empty()) {
     return forward ? recallNext() : recallPrev();
   }
@@ -49,12 +68,14 @@ std::string Recollection::suggestPrev(const std::string &suggestionSeed) {
 }
 
 std::string Recollection::recallNext() {
+  if (data.empty()){
+    return "";
+  }
 
   if (state != State::HISTORY_CRAWL) {
     histIt = history.cbegin();
   } else {
     histIt++;
-    MARKER
     if (histIt == history.cend()) {
       histIt = history.cbegin();
     }
@@ -66,13 +87,17 @@ std::string Recollection::recallNext() {
 }
 std::string Recollection::recallPrev() {
 
+  if (data.empty()){
+    return "";
+  }
+
   if (state != State::HISTORY_CRAWL) {
     histIt = std::prev(history.cend());
   } else {
-    histIt--;
     if (histIt == history.cbegin()) {
-      histIt = std::prev(history.cend());
+      histIt = history.cend();
     }
+    histIt--;
   }
   dataIt = histIt->content;
   state = State::HISTORY_CRAWL;
@@ -84,7 +109,7 @@ bool Recollection::findSuggestion(const std::string &suggestionSeed,
                                   bool useUpperBound) {
   validDataIt = false;
 
-  if (suggestionSeed.empty()) {
+  if (suggestionSeed.empty() || data.empty()) {
     return validDataIt;
   }
 
@@ -110,12 +135,13 @@ std::string Recollection::suggest(const std::string &suggestionSeed) {
 
 void Recollection::load() {
 
-  if (isLoaded){
+  if (isLoaded) {
+    state = State::SEARCHING;
+    dataIt = data.begin();
     return;
   }
 
   std::ifstream df(absPath, std::ifstream::in);
-  std::ifstream hf(absPath + histPrefix, std::ifstream::in);
   std::string line;
 
   if (df.good()) {
@@ -129,14 +155,16 @@ void Recollection::load() {
 
   dataIt = data.begin();
   isLoaded = true;
-
-  loadDbgPrint();
 }
 void Recollection::save(const std::string &str) {
 
+  if (str.empty()) {
+    return;
+  }
+
   auto d = data.insert(std::make_pair(str, history.end()));
 
-  if(d.first->second != history.end()){
+  if (d.first->second != history.end()) {
     history.erase(d.first->second);
   }
 
@@ -146,70 +174,53 @@ void Recollection::save(const std::string &str) {
   d.first->second = h;
 
   state = State::SEARCHING;
+  dataIt = data.begin();
+  dbgPrintIsLoaded = false;
 }
 
 void Recollection::store() {
 
-  //  std::ofstream df(absPath);
-  //  std::ofstream hf(absPath + histPrefix);
-  //
-  //  if (!df.good() && !hf.good()) {
-  //    std::cerr << "Open output file's at " << absPath << " failed!!\n";
-  //    return;
-  //  }
-  //
-  //  std::copy(data.begin(), data.end(),
-  //            std::ostream_iterator<std::string>(df, "\n"));
-  //
-  //  std::copy(history.begin(), history.end(),
-  //            std::ostream_iterator<int>(hf, "\n"));
+  if (!fs::is_directory(folder)) {
+    fs::create_directory(folder);
+  }
+
+  std::ofstream df(absPath);
+
+  if (!df.good()) {
+    std::cerr << "Open output file's at " << absPath << " failed!!\n";
+    return;
+  }
+
+  for (auto h : history) {
+    df << h.content->first << '\n';
+  }
 }
 
-Recollection::~Recollection() {
-  //  store();
-}
+Recollection::~Recollection() { store(); }
 
 // ------------------------ Debug stuff -------------------------
 
-void Recollection::dbgPrintBounds() {
-  //  if (!dbgPrintIsLoaded) {
-  //    loadDbgPrint();
-  //    dbgPrintIsLoaded = true;
-  //  }
-
+void Recollection::dbgPrintContent() {
   DBP(dbgPrintVector.size())
-  //  ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, dbgPrintVector,
-  //                                     dbgPrintVector.begin(),
-  //                                     dbgPrintVector.end());
+  if (data.empty()) {
+    std::cout << "Data is empty! " << '\n';
+    return;
+  }
 
-  //
+  if (!dbgPrintIsLoaded){
+    loadDbgPrint();
+  }
+
   auto d = std::upper_bound(dbgPrintVector.begin(), dbgPrintVector.end(),
                             dataIt->first);
-
-  //  auto u = std::upper_bound(dbgPrintVector.begin(), dbgPrintVector.end(),
-  //                            upperBound->first);
-  //
-  //  auto l = std::upper_bound(dbgPrintVector.begin(), dbgPrintVector.end(),
-  //                            std::prev(lowerBound)->first);
-
   std::cout << "d --> " << dataIt->first << '\n';
-  //  std::cout << "u --> " << upperBound->first << '\n';
-  //  std::cout << "l --> " << std::prev(lowerBound)->first << '\n';
-
   ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, dbgPrintVector, --d);
-}
-
-void Recollection::dbgPrintContent() {
-
-  //  ppVector<std::vector<std::string>>(DBG_PEEK_SIZE, data, dataIt);
-  //  ppVector<std::deque<uint32_t>>(DBG_PEEK_SIZE, history, history.begin());
 }
 
 void Recollection::dbgPrintAttr() {
   std::cout << "fileName: " << fileName << std::endl;
   std::cout << "folder: " << folder << std::endl;
   std::cout << "absPath: " << absPath << std::endl;
-  std::cout << "historyLimit: " << historyLimit << std::endl;
 }
 void Recollection::test() {
   load();
@@ -218,9 +229,11 @@ void Recollection::test() {
   store();
 }
 void Recollection::loadDbgPrint() {
+  dbgPrintVector.clear();
   for (const auto &st : data) {
     dbgPrintVector.emplace_back(st.first);
   }
+  dbgPrintIsLoaded = true;
 }
 
 } // namespace Manduca

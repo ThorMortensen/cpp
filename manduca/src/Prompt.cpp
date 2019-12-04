@@ -55,13 +55,9 @@ void Prompt::moveCursor(KeyCode direction, std::string &inputStr,
   }
 }
 
-//std::tuple<std::string, bool> Prompt::ask(const std::string &question, const std::string &defaultAnsw,
-//            const std::function<bool(const std::string &answ)> validate) {
-////  auto is = ask(question, defaultAnsw) if (validate(is)) { ; }
-//}
-
 std::string Prompt::ask(const std::string &question,
-                        const std::string &defaultAnsw) {
+                        const std::string &defaultAnsw,
+                        std::function<bool(const std::string &answ)> validate) {
   bool done = false;
   KeyCode kIn = KeyCode::NOP;
   std::string suggestion = defaultAnsw;
@@ -69,18 +65,15 @@ std::string Prompt::ask(const std::string &question,
   std::string inputStr;
 
   recall.load();
-  recall.dbgPrintAttr();
+  //  recall.dbgPrintAttr();
 
-  // c.caretShow(true);
-
-  std::cout << question << mDye::gray(suggestion);
+  printAskPrompt(question, suggestion, inputStr);
 
   while (!done) {
     kIn = c.getKeyPress();
 
     switch (kIn) {
     case KeyCode::UP:
-      MARKER
       suggestion = recall.suggestNext(inputStr);
       break;
     case KeyCode::DOWN:
@@ -91,8 +84,18 @@ std::string Prompt::ask(const std::string &question,
       moveCursor(kIn, inputStr, suggestion);
       break;
     case KeyCode::ENTER:
-      recall.save(inputStr);
-      done = true;
+      if(!defaultAnsw.empty() && inputStr.empty()){
+        inputStr = defaultAnsw;
+        c.clearLine();
+        printAskPrompt(question, suggestion, inputStr);
+      }
+
+      if (disableAutoSave){
+        done = true;
+      } else if (validate(inputStr)) {
+        recall.save(inputStr);
+        done = true;
+      }
       break;
     case KeyCode::NOP:
       break;
@@ -148,24 +151,29 @@ std::string Prompt::ask(const std::string &question,
       suggestion = recall.suggest(inputStr);
       break;
     }
-    NL;
-    recall.dbgPrintBounds();
-    NL;
+//        NL;
+    //    recall.dbgPrintContent();
+    //    NL;
     c.clearLine();
-    int32_t dif = suggestion.length() - inputStr.length();
-    if (dif > 0) {
-      std::string pp =
-          inputStr +
-          mDye::dim(mDye::gray(suggestion.substr(inputStr.length(), dif)));
-      std::cout << question << pp;
-    } else {
-      dif = 0;
-      std::cout << question << inputStr;
-    }
-    c.move(Curser::Direction_e::LEFT, dif + cursorOffset);
+    printAskPrompt(question, suggestion, inputStr);
   }
-  lastInputStr = inputStr;
+
+  std::cout << '\n';
   return inputStr;
+}
+
+void Prompt::printAskPrompt(const std::string &question, const std::string &suggestion, const std::string &inputStr){
+  int32_t dif = suggestion.length() - inputStr.length();
+  if (dif > 0) {
+    std::string pp =
+        inputStr +
+        mDye::dim(mDye::gray(suggestion.substr(inputStr.length(), dif)));
+    std::cout << question << pp;
+  } else {
+    dif = 0;
+    std::cout << question << inputStr;
+  }
+  c.move(Curser::Direction_e::LEFT, dif + cursorOffset);
 }
 
 int32_t Prompt::choose(const std::string &question,
@@ -221,8 +229,25 @@ int32_t Prompt::choose(const std::string &question,
 
   return selection;
 }
+void Prompt::save(const std::string &string) {
+  recall.load();
+  recall.save(string);
+}
 
-//void Prompt::save() { recall.save(lastInputStr); }
-//void Prompt::save(const std::string &string) { recall.save(string); }
+std::string Prompt::ask(const std::string &question,
+                        const std::string &defaultAnsw) {
+  return ask(question, defaultAnsw,
+             ([](const std::string &str) { return true; }));
+}
+std::string Prompt::ask(const std::string &question,
+                        std::function<bool(const std::string &answ)> validate) {
+  return ask(question, "", validate);
+}
+std::string Prompt::ask(const std::string &question) {
+  return ask(question, "");
+}
+
+// void Prompt::save() { recall.save(lastInputStr); }
+// void Prompt::save(const std::string &string) { recall.save(string); }
 
 } // namespace Manduca
