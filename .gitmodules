@@ -1,0 +1,3 @@
+[submodule "loxo"]
+	path = loxo
+	url = git@github.com:ThorMortensen/loxo.git
