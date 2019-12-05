@@ -12,6 +12,7 @@ file(GLOB allFiles
 
 # Create the executable
 add_executable(${PROJECT_NAME}.out ${allFiles})
+add_library(${PROJECT_NAME} ${allFiles})
 target_include_directories(${PROJECT_NAME}.out PRIVATE "include")
 target_link_libraries(${PROJECT_NAME}.out stdc++fs)
 
