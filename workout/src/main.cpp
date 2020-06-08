@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 
+#include <loxo.hpp>
+
 using namespace std;
 
 vector<int> twoSum(vector<int> &nums, int target) {
@@ -127,7 +129,12 @@ void addTwoNumbersTest() {
 
 int main() {
 
-  addTwoNumbersTest();
+  int foo = 42;
+
+  lxo::DBP(foo);
+  lxo::DBP("Hello debug");
+
+//  addTwoNumbersTest();
 
   return 0;
 }
